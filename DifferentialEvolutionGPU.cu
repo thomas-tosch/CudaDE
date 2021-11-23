@@ -292,7 +292,7 @@ __global__ void evolutionKernel(float *d_target,
     }
 
 
-    float score = costFunc(&vec, costArgs);
+    float score = costFunc(vec, costArgs);
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
