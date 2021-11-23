@@ -275,6 +275,22 @@ __global__ void evolutionKernel(float *d_target,
         j = (j+1) % dim;
     } // end for loop through parameters
 
+    const float vec* = &d_trial[idx*dim];
+
+    if (vec[0] < d_min[0]) {
+        vec[0] = d_min[0];
+    }
+    if (vec[0] > d_max[0]) {
+        vec[0] = d_max[0];
+    }
+    if (vec[1] < d_min[1]) {
+        vec[1] = d_min[1];
+    }
+    if (vec[1] > d_max[1]) {
+        vec[1] = d_max[1];
+    }
+
+
     float score = costFunc(&d_trial[idx*dim], costArgs);
     if (score < d_cost[idx]) {
         // copy trial into new vector
