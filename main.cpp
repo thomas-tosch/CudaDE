@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
         dim = atoi(argv[1]);
     }
     // create the min and max bounds for the search space.
-    float minBounds[2] = {-50, -50};
-    float maxBounds[2] = {100, 200};
+    float minBounds[2] = {-100, -100};
+    float maxBounds[2] = {100, 100};
 
     // a random array or data that gets passed to the cost function.
     float arr[3] = {2.5, 2.6, 2.7};
