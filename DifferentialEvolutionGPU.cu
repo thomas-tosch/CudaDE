@@ -275,7 +275,7 @@ __global__ void evolutionKernel(float *d_target,
         j = (j+1) % dim;
     } // end for loop through parameters
 
-    float vec;
+    float vec[2];
     vec = d_trial[idx*dim];
 
     if (vec[0] < d_min[0]) {
