@@ -264,9 +264,11 @@ __global__ void evolutionKernel(float *d_target,
     float F4 = 0.2;
 
     float best = FLT_MAX;
+    int bestIdx = 0;
     for (int i = 0; i < popSize * dim; i++) {
-        if (d_trial[i] < best) {
-            best = d_trial[i];
+        if (d_cost[i] < best) {
+            best = d_cost[i];
+            bestIdx = i;
         }
     }
 
@@ -275,7 +277,7 @@ __global__ void evolutionKernel(float *d_target,
         if ((curand(state) % 1000) < CR || k==dim) {
             // trial vector param comes from vector plus weighted differential
             //d_trial[(idx*dim)+j] = d_target[(a*dim)+j] + (F * (d_target[(b*dim)+j] - d_target[(c*dim)+j]));
-            d_trial[(idx*dim)+j] = d_target[(idx*dim)+j] + (F1 * (best - d_target[(idx*dim)+j]))
+            d_trial[(idx*dim)+j] = d_target[(idx*dim)+j] + (F1 * (d_target[bestIdx] - d_target[(idx*dim)+j]))
                                    + (F2 * (d_target[(a*dim)+j] - d_target[(idx*dim)+j])) + (F3 * (d_target[(b*dim)+j] - d_target[(c*dim)+j]))
                                    + (F4 * (d_target[(d*dim)+j] - d_target[(e*dim)+j]));
         } else {
