@@ -47,13 +47,13 @@ int main(int argc, char* argv[])
     // data that is created in host, then copied to a device version for use with the cost function.
     struct data x;
     struct data *d_x;
-    gpuErrorCheck(cudaMalloc(&x.arr, sizeof(float) * 3));
+    //gpuErrorCheck(cudaMalloc(&x.arr, sizeof(float) * 3));
     unsigned long size = sizeof(struct data);
     gpuErrorCheck(cudaMalloc((void **)&d_x, size));
     x.v = 3;
     x.dim = dim;
     x.shift = -450;
-    gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
+    //gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
     DifferentialEvolution minimizer(192,50, dim, 0.9, 0.5, minBounds, maxBounds);
