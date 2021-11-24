@@ -64,6 +64,7 @@
 
 #include "DifferentialEvolution.hpp"
 #include "DifferentialEvolutionGPU.h"
+#include <stdio.h>
 
 // Constructor for DifferentialEvolution
 //
