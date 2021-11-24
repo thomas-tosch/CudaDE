@@ -158,12 +158,12 @@ __device__ float sphere(const float *vec, const void *args)
 __device__ float costFunc(const float *vec, const void *args) {
 #if COST_SELECTOR == SPHERE
     return sphere(vec, args);
-#elif COST_SELECTOR == ROSENBROCK
+/*#elif COST_SELECTOR == ROSENBROCK
     return rosenbrock(vec, args);
 #elif COST_SELECTOR == ACKLEY
     return ackley(vec, args);
 #elif COST_SELECTOR == RASTRIGIN
-    return rastrigin(vec, args);
+    return rastrigin(vec, args);*/
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
