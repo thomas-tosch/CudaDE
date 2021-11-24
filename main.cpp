@@ -40,10 +40,10 @@ int main(int argc, char* argv[])
         dim = atoi(argv[1]);
     }
     if (argc > 2) {
-        gen = atoi(argc[2]);
+        gen = atoi(argv[2]);
     }
     if (argc > 3) {
-        pop = atoi(argc[3]);
+        pop = atoi(argv[3]);
     }
     // create the min and max bounds for the search space.
     float minBounds[2] = {-100, -100};
