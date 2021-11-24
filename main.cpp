@@ -34,8 +34,16 @@
 int main(int argc, char* argv[])
 {
     int dim = 2;
+    int gen = 50;
+    int pop = 192;
     if (argc > 1) {
         dim = atoi(argv[1]);
+    }
+    if (argc > 2) {
+        gen = atoi(argc[2]);
+    }
+    if (argc > 3) {
+        pop = atoi(argc[3]);
     }
     // create the min and max bounds for the search space.
     float minBounds[2] = {-100, -100};
@@ -56,7 +64,7 @@ int main(int argc, char* argv[])
     //gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
-    DifferentialEvolution minimizer(192,50, dim, 0.9, 0.5, minBounds, maxBounds);
+    DifferentialEvolution minimizer(pop,gen, dim, 0.9, 0.5, minBounds, maxBounds);
 
     gpuErrorCheck(cudaMemcpy(d_x, (void *)&x, sizeof(struct data), cudaMemcpyHostToDevice));
 
