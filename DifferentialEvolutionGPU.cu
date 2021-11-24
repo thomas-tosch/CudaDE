@@ -133,10 +133,13 @@ __device__ float cost3D(const float *vec, const void *args)
 __device__ float sphere(const float *vec, const void *args)
 {
     float x = vec[0];
-    float y = vec[1];
-    return (x*x) + (y*y);
+    return (x*x);
 }
-
+__device__ float rosenbrock(const float *vec, const void *args)
+{
+    float x = vec[0];
+    float y = vec[1];
+}
 
 
 
@@ -149,12 +152,14 @@ __device__ float sphere(const float *vec, const void *args)
 // architecture used where a standard C++ class is used to wrap the CUDA kernels and
 // handle most of the memory mangement used.
 __device__ float costFunc(const float *vec, const void *args) {
-#if COST_SELECTOR == QUADRATIC_COST
+#if COST_SELECTOR == SPHERE
     return sphere(vec, args);
-#elif COST_SELECTOR == COST_WITH_ARGS
-    return sphere(vec, args);
-#elif COST_SELECTOR == MANY_LOCAL_MINMA
-    return costFunctionWithManyLocalMinima(vec, args);
+#elif COST_SELECTOR == ROSENBROCK
+    return rosenbrock(vec, args);
+#elif COST_SELECTOR == ACKLEY
+    return ackley(vec, args);
+#elif COST_SELECTOR == RASTRIGIN
+    return rastrigin(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
