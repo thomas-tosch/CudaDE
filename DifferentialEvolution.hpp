@@ -75,7 +75,7 @@
 // data to the cost. Here is the struct for the example of passing arguements.
 // I recommend you keep it here.
 struct data {
-    float shift;
+    float *arr;
     float v;
     int dim;
 };
@@ -87,23 +87,23 @@ private:
     float *d_cost;
     float *d_mutant;
     float *d_trial;
-    
-    
+
+
     float *d_min;
     float *d_max;
     float *h_cost;
-    
+
     void *d_randStates;
-    
+
     int popSize;
     int dim;
-    
+
     int CR;
     int numGenerations;
     float F;
-    
+
 public:
-    
+
     // Constructor for DifferentialEvolution
     //
     // @param PopulationSize - the number of agents the DE solver uses.
@@ -115,9 +115,9 @@ public:
     //              default = 0.5
     // @param func - the cost function to minimize.
     DifferentialEvolution(int PopulationSize, int NumGenerations, int Dimensions,
-                float crossoverConstant, float mutantConstant,
-                float *minBounds, float *maxBounds);
-    
+                          float crossoverConstant, float mutantConstant,
+                          float *minBounds, float *maxBounds);
+
     // fmin
     // wrapper to the cuda function C function for differential evolution.
     // @param args - this a pointer to arguments for the cost function.
@@ -125,7 +125,7 @@ public:
     //
     // @return the best set of parameters
     std::vector<float> fmin(void *args);
-    
+
 };
 
 #endif /* DifferentialEvolution_hpp */

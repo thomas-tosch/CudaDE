@@ -72,7 +72,6 @@
 // for clock()
 #include <ctime>
 #include <cmath>
-#include <algorithm>
 
 // basic function for exiting code on CUDA errors.
 // Does no special error handling, just exits the program if it finds any errors and gives an error message.
@@ -98,15 +97,15 @@ inline void gpuAssert(cudaError_t code, const char *file, int line)
 //
 // @param vec - the vector to be evaulated.
 // @param args - a set of user arguments.
-/*__device__ float quadraticFunc(const float *vec, const void *args)
+__device__ float quadraticFunc(const float *vec, const void *args)
 {
     float x = vec[0]-3;
 
     float y = vec[1];
     return (x*x) + (y*y);
-}*/
+}
 
-/*__device__ float costWithArgs(const float *vec, const void *args)
+__device__ float costWithArgs(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
 
@@ -129,22 +128,9 @@ __device__ float cost3D(const float *vec, const void *args)
     float y = vec[1] - 1;
     float z = vec[2] + 3;
     return (x*x*x*x)- (2*x*x*x) + (z*z*z*z) + (y*y*y);
-}*/
-__device__ float sphere(const float *vec, const void *args)
-{
-    const struct data *a = (struct data *)args;
-
-    float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum += vec[i] * vec[i];
-    }
-    return sum + a->shift;
 }
-/*__device__ float rosenbrock(const float *vec, const void *args)
-{
 
-}
-*/
+
 
 
 // costFunc
@@ -156,14 +142,12 @@ __device__ float sphere(const float *vec, const void *args)
 // architecture used where a standard C++ class is used to wrap the CUDA kernels and
 // handle most of the memory mangement used.
 __device__ float costFunc(const float *vec, const void *args) {
-#if COST_SELECTOR == SPHERE
-    return sphere(vec, args);
-/*#elif COST_SELECTOR == ROSENBROCK
-    return rosenbrock(vec, args);
-#elif COST_SELECTOR == ACKLEY
-    return ackley(vec, args);
-#elif COST_SELECTOR == RASTRIGIN
-    return rastrigin(vec, args);*/
+#if COST_SELECTOR == QUADRATIC_COST
+    return quadraticFunc(vec, args);
+#elif COST_SELECTOR == COST_WITH_ARGS
+    return costWithArgs(vec, args);
+#elif COST_SELECTOR == MANY_LOCAL_MINMA
+    return costFunctionWithManyLocalMinima(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
@@ -246,53 +230,24 @@ __global__ void evolutionKernel(float *d_target,
     int a;
     int b;
     int c;
-    int d;
-    int e;
     int j;
     //////////////////// Random index mutation generation //////////////////
     // select a different random number then index
     do { a = curand(state) % popSize; } while (a == idx);
     do { b = curand(state) % popSize; } while (b == idx || b == a);
     do { c = curand(state) % popSize; } while (c == idx || c == a || c == b);
-    do { d = curand(state) % popSize; } while (d == idx || d == a || d == b || d == c);
-    do { e = curand(state) % popSize; } while (e == idx || e == a || e == b || e == c || e == d);
     j = curand(state) % dim;
-
-    float F1 = 0.25;
-    float F2 = 0.25;
-    float F3 = 0.2;
-    float F4 = 0.2;
-
-    float best = FLT_MAX;
-    int bestIdx = 0;
-    for (int i = 0; i < popSize * dim; i++) {
-        if (d_cost[i] < best) {
-            best = d_cost[i];
-            bestIdx = i;
-        }
-    }
 
     ///////////////////// MUTATION ////////////////
     for (int k = 1; k <= dim; k++) {
         if ((curand(state) % 1000) < CR || k==dim) {
             // trial vector param comes from vector plus weighted differential
-            //d_trial[(idx*dim)+j] = d_target[(a*dim)+j] + (F * (d_target[(b*dim)+j] - d_target[(c*dim)+j]));
-            d_trial[(idx*dim)+j] = d_target[(idx*dim)+j] + (F1 * (d_target[(bestIdx*dim)+j] - d_target[(idx*dim)+j]))
-                                   + (F2 * (d_target[(a*dim)+j] - d_target[(idx*dim)+j])) + (F3 * (d_target[(b*dim)+j] - d_target[(c*dim)+j]))
-                                   + (F4 * (d_target[(d*dim)+j] - d_target[(e*dim)+j]));
+            d_trial[(idx*dim)+j] = d_target[(a*dim)+j] + (F * (d_target[(b*dim)+j] - d_target[(c*dim)+j]));
         } else {
             d_trial[(idx*dim)+j] = d_target[(idx*dim)+j];
         } // end if else for creating trial vector
         j = (j+1) % dim;
     } // end for loop through parameters
-
-    if (d_trial[idx*dim] < d_min[0]) {
-        d_trial[idx*dim] = d_min[0];
-    }
-    if (d_trial[idx*dim] > d_max[0]) {
-        d_trial[idx*dim] = d_max[0];
-    }
-
 
     float score = costFunc(&d_trial[idx*dim], costArgs);
     if (score < d_cost[idx]) {

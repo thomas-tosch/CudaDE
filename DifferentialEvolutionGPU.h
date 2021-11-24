@@ -62,13 +62,13 @@
 #ifndef __DIFFERENTIAL_EVOLUTION_GPU__
 #define __DIFFERENTIAL_EVOLUTION_GPU__
 
-#define SPHERE 0
-//#define COST_WITH_ARGS 1
-//#define MANY_LOCAL_MINMA 2
-//#define COST_3D 3
+#define QUADRATIC_COST 0
+#define COST_WITH_ARGS 1
+#define MANY_LOCAL_MINMA 2
+#define COST_3D 3
 
 
-#define COST_SELECTOR SPHERE
+#define COST_SELECTOR COST_WITH_ARGS
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.

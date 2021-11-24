@@ -76,8 +76,8 @@
 //              default = 0.5
 // @param func - the cost function to minimize.
 DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerations,
-        int Dimensions, float crossoverConstant, float mutantConstant,
-        float *minBounds, float *maxBounds)
+                                             int Dimensions, float crossoverConstant, float mutantConstant,
+                                             float *minBounds, float *maxBounds)
 {
     popSize = PopulationSize;
     dim = Dimensions;
@@ -85,7 +85,7 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
     CR = crossoverConstant*1000;
     F = mutantConstant;
     cudaError_t ret;
-    
+
     ret = cudaMalloc(&d_target1, sizeof(float) * popSize * dim);
     gpuErrorCheck(ret);
     ret = cudaMalloc(&d_target2, sizeof(float) * popSize * dim);
@@ -94,10 +94,10 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
     gpuErrorCheck(ret);
     ret = cudaMalloc(&d_trial, sizeof(float) * popSize * dim);
     gpuErrorCheck(ret);
-    
+
     ret = cudaMalloc(&d_cost, sizeof(float) * PopulationSize);
     gpuErrorCheck(ret);
-    
+
     ret = cudaMalloc(&d_min, sizeof(float) * dim);
     gpuErrorCheck(ret);
     ret = cudaMalloc(&d_max, sizeof(float) * dim);
@@ -106,7 +106,7 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
     gpuErrorCheck(ret);
     ret = cudaMemcpy(d_max, maxBounds, sizeof(float) * dim, cudaMemcpyHostToDevice);
     gpuErrorCheck(ret);
-    
+
     h_cost = new float[popSize * dim];
     d_randStates = createRandNumGen(popSize);
 }
@@ -120,10 +120,10 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
 std::vector<float> DifferentialEvolution::fmin(void *args)
 {
     std::vector<float> result(dim);
-    
+
     differentialEvolution(d_target1, d_trial, d_cost, d_target2, d_min,
-            d_max, h_cost, d_randStates, dim, popSize, numGenerations, CR, F, args,
-            result.data());
-    
+                          d_max, h_cost, d_randStates, dim, popSize, numGenerations, CR, F, args,
+                          result.data());
+
     return result;
 }
