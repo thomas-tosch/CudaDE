@@ -106,7 +106,7 @@ inline void gpuAssert(cudaError_t code, const char *file, int line)
     return (x*x) + (y*y);
 }*/
 
-__device__ float costWithArgs(const float *vec, const void *args)
+/*__device__ float costWithArgs(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
 
@@ -129,7 +129,7 @@ __device__ float cost3D(const float *vec, const void *args)
     float y = vec[1] - 1;
     float z = vec[2] + 3;
     return (x*x*x*x)- (2*x*x*x) + (z*z*z*z) + (y*y*y);
-}
+}*/
 __device__ float sphere(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
@@ -138,7 +138,7 @@ __device__ float sphere(const float *vec, const void *args)
     for (int i = 0; i < a->dim; i++) {
         sum += vec[i] * vec[i];
     }
-    return sum;
+    return sum - a->shift;
 }
 /*__device__ float rosenbrock(const float *vec, const void *args)
 {
@@ -284,12 +284,12 @@ __global__ void evolutionKernel(float *d_target,
         j = (j+1) % dim;
     } // end for loop through parameters
 
-    if (d_trial[idx*dim] < d_min[0]) {
+   /* if (d_trial[idx*dim] < d_min[0]) {
         d_trial[idx*dim] = d_min[0];
     }
     if (d_trial[idx*dim] > d_max[0]) {
         d_trial[idx*dim] = d_max[0];
-    }
+    }*/
 
 
     float score = costFunc(&d_trial[idx*dim], costArgs);
