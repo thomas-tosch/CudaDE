@@ -129,6 +129,16 @@ __device__ float cost3D(const float *vec, const void *args)
     float z = vec[2] + 3;
     return (x*x*x*x)- (2*x*x*x) + (z*z*z*z) + (y*y*y);
 }
+__device__ float sphere(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+
+    float sum = 0;
+    for (int i = 0; i < a->dim; i++) {
+        sum += vec[i] * vec[i];
+    }
+    return sum - 450;
+}
 
 
 
@@ -148,6 +158,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     return costWithArgs(vec, args);
 #elif COST_SELECTOR == MANY_LOCAL_MINMA
     return costFunctionWithManyLocalMinima(vec, args);
+#elif COST_SELECTOR == SPHERE
+    return sphere(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
@@ -230,19 +242,39 @@ __global__ void evolutionKernel(float *d_target,
     int a;
     int b;
     int c;
+    int d;
+    int e;
     int j;
     //////////////////// Random index mutation generation //////////////////
     // select a different random number then index
     do { a = curand(state) % popSize; } while (a == idx);
     do { b = curand(state) % popSize; } while (b == idx || b == a);
     do { c = curand(state) % popSize; } while (c == idx || c == a || c == b);
+    do { d = curand(state) % popSize; } while (d == idx || d == a || d == b || d == c);
+    do { e = curand(state) % popSize; } while (e == idx || e == a || e == b || e == c || e == d);
     j = curand(state) % dim;
+
+    float F1 = 0.25;
+    float F2 = 0.25;
+    float F3 = 0.2;
+    float F4 = 0.2;
+
+    float best = FLT_MAX;
+    int bestIdx = 0;
+    for (int i = 0; i < popSize * dim; i++) {
+        if (d_cost[i] < best) {
+            best = d_cost[i];
+            bestIdx = i;
+        }
+    }
 
     ///////////////////// MUTATION ////////////////
     for (int k = 1; k <= dim; k++) {
         if ((curand(state) % 1000) < CR || k==dim) {
             // trial vector param comes from vector plus weighted differential
-            d_trial[(idx*dim)+j] = d_target[(a*dim)+j] + (F * (d_target[(b*dim)+j] - d_target[(c*dim)+j]));
+            d_trial[(idx*dim)+j] = d_target[(idx*dim)+j] + (F1 * (d_target[(bestIdx*dim)+j] - d_target[(idx*dim)+j]))
+                                   + (F2 * (d_target[(a*dim)+j] - d_target[(idx*dim)+j])) + (F3 * (d_target[(b*dim)+j] - d_target[(c*dim)+j]))
+                                   + (F4 * (d_target[(d*dim)+j] - d_target[(e*dim)+j]));
         } else {
             d_trial[(idx*dim)+j] = d_target[(idx*dim)+j];
         } // end if else for creating trial vector

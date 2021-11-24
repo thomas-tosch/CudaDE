@@ -66,9 +66,10 @@
 #define COST_WITH_ARGS 1
 #define MANY_LOCAL_MINMA 2
 #define COST_3D 3
+#define SPHERE 4
 
 
-#define COST_SELECTOR COST_WITH_ARGS
+#define COST_SELECTOR SPHERE
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.
