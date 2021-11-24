@@ -140,11 +140,11 @@ __device__ float sphere(const float *vec, const void *args)
     }
     return sum;
 }
-__device__ float rosenbrock(const float *vec, const void *args)
+/*__device__ float rosenbrock(const float *vec, const void *args)
 {
 
 }
-
+*/
 
 
 // costFunc
