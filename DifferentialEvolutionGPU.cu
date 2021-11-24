@@ -284,12 +284,12 @@ __global__ void evolutionKernel(float *d_target,
         j = (j+1) % dim;
     } // end for loop through parameters
 
-   /* if (d_trial[idx*dim] < d_min[0]) {
+    if (d_trial[idx*dim] < d_min[0]) {
         d_trial[idx*dim] = d_min[0];
     }
     if (d_trial[idx*dim] > d_max[0]) {
         d_trial[idx*dim] = d_max[0];
-    }*/
+    }
 
 
     float score = costFunc(&d_trial[idx*dim], costArgs);
