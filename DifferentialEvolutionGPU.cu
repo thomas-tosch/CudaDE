@@ -132,13 +132,17 @@ __device__ float cost3D(const float *vec, const void *args)
 }
 __device__ float sphere(const float *vec, const void *args)
 {
-    float x = vec[0];
-    return (x*x);
+    const struct data *a = (struct data *)args;
+
+    float sum = 0
+    for (int i = 0; i < a->dim; i++) {
+        sum += vec[i] * vec[i];
+    }
+    return sum;
 }
 __device__ float rosenbrock(const float *vec, const void *args)
 {
-    float x = vec[0];
-    float y = vec[1];
+
 }
 
 
