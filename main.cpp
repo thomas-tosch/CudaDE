@@ -62,7 +62,10 @@ int main(int argc, char* argv[])
 
     // get the result from the minimizer
     std::vector<float> result = minimizer.fmin(d_x);
-    std::cout << "Result = " << result[0] << ", " << result[1] << std::endl;
+    std::cout << "Result = " << std::endl;
+    for (int i = 0; i < dim; i++) {
+        std::cout << result[i] << std::endl;
+    }
     std::cout << "Finished main function." << std::endl;
     return 1;
 }
