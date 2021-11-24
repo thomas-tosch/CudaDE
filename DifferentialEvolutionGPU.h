@@ -63,9 +63,9 @@
 #define __DIFFERENTIAL_EVOLUTION_GPU__
 
 #define SPHERE 0
-#define COST_WITH_ARGS 1
-#define MANY_LOCAL_MINMA 2
-#define COST_3D 3
+//#define COST_WITH_ARGS 1
+//#define MANY_LOCAL_MINMA 2
+//#define COST_3D 3
 
 
 #define COST_SELECTOR SPHERE
