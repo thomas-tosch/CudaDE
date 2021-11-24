@@ -31,23 +31,11 @@
 
 
 
-int main(int argc, char* argv[])
+int main(void)
 {
-    int dim = 2;
-    int gen = 50;
-    int pop = 192;
-    if (argc > 1) {
-        dim = atoi(argv[1]);
-    }
-    if (argc > 2) {
-        gen = atoi(argv[2]);
-    }
-    if (argc > 3) {
-        pop = atoi(argv[3]);
-    }
     // create the min and max bounds for the search space.
-    float minBounds[2] = {-100, -100};
-    float maxBounds[2] = {100, 100};
+    float minBounds[2] = {-50, -50};
+    float maxBounds[2] = {100, 200};
 
     // a random array or data that gets passed to the cost function.
     float arr[3] = {2.5, 2.6, 2.7};
@@ -55,25 +43,21 @@ int main(int argc, char* argv[])
     // data that is created in host, then copied to a device version for use with the cost function.
     struct data x;
     struct data *d_x;
-    //gpuErrorCheck(cudaMalloc(&x.arr, sizeof(float) * 3));
+    gpuErrorCheck(cudaMalloc(&x.arr, sizeof(float) * 3));
     unsigned long size = sizeof(struct data);
     gpuErrorCheck(cudaMalloc((void **)&d_x, size));
     x.v = 3;
-    x.dim = dim;
-    x.shift = -450;
-    //gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
+    x.dim = 2;
+    gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
-    DifferentialEvolution minimizer(pop,gen, dim, 0.9, 0.5, minBounds, maxBounds);
+    DifferentialEvolution minimizer(192,50, 2, 0.9, 0.5, minBounds, maxBounds);
 
     gpuErrorCheck(cudaMemcpy(d_x, (void *)&x, sizeof(struct data), cudaMemcpyHostToDevice));
 
     // get the result from the minimizer
     std::vector<float> result = minimizer.fmin(d_x);
-    std::cout << "Result = " << std::endl;
-    for (int i = 0; i < dim; i++) {
-        std::cout << result[i] << std::endl;
-    }
+    std::cout << "Result = " << result[0] << ", " << result[1] << std::endl;
     std::cout << "Finished main function." << std::endl;
     return 1;
 }
