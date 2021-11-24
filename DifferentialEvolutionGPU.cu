@@ -280,24 +280,15 @@ __global__ void evolutionKernel(float *d_target,
         j = (j+1) % dim;
     } // end for loop through parameters
 
-    float *vec;
-    vec = &d_trial[idx*dim];
-
-    if (vec[0] < d_min[0]) {
-        vec[0] = d_min[0];
+    if (&d_trial[idx*dim] < d_min[0]) {
+        &d_trial[idx*dim] = d_min[0];
     }
-    if (vec[0] > d_max[0]) {
-        vec[0] = d_max[0];
-    }
-    if (vec[1] < d_min[1]) {
-        vec[1] = d_min[1];
-    }
-    if (vec[1] > d_max[1]) {
-        vec[1] = d_max[1];
+    if (&d_trial[idx*dim] > d_max[0]) {
+        &d_trial[idx*dim] = d_max[0];
     }
 
 
-    float score = costFunc(vec, costArgs);
+    float score = costFunc(&d_trial[idx*dim], costArgs);
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
