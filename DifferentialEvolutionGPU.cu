@@ -134,7 +134,7 @@ __device__ float sphere(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
 
-    float sum = 0
+    float sum = 0;
     for (int i = 0; i < a->dim; i++) {
         sum += vec[i] * vec[i];
     }
