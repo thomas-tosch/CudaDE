@@ -75,10 +75,9 @@
 // data to the cost. Here is the struct for the example of passing arguements.
 // I recommend you keep it here.
 struct data {
-    float *arr;
+    float shift;
     float v;
     int dim;
-    float shift;
 };
 
 class DifferentialEvolution {

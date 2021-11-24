@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
     gpuErrorCheck(cudaMalloc((void **)&d_x, size));
     x.v = 3;
     x.dim = dim;
+    x.shift = -450;
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2

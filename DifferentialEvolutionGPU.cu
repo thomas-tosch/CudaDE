@@ -138,7 +138,7 @@ __device__ float sphere(const float *vec, const void *args)
     for (int i = 0; i < a->dim; i++) {
         sum += vec[i] * vec[i];
     }
-    return sum - a->shift;
+    return sum + a->shift;
 }
 /*__device__ float rosenbrock(const float *vec, const void *args)
 {
