@@ -397,10 +397,10 @@ void differentialEvolution(float *d_target,
     //std::cout << "\n\n agents = ";
     //printCudaVector(d_target, popSize*dim);
 
-    //std::cout << "Best cost = " << bestCost << " bestIdx = " << bestIdx << std::endl;
+    std::cout << "Best cost = " << bestCost << " bestIdx = " << bestIdx << std::endl;
 
     // output best minimization.
-    ret = cudaMemcpy(h_output, bestCost, sizeof(float)*dim, cudaMemcpyDeviceToHost);
+    ret = cudaMemcpy(h_output, bestIdx, sizeof(float)*dim, cudaMemcpyDeviceToHost);
     gpuErrorCheck(ret);
 }
 
