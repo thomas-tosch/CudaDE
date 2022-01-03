@@ -31,7 +31,7 @@
 
 
 
-int main(void)
+int main(int argc, char *argv[])
 {
     // create the min and max bounds for the search space.
     float minBounds[2] = {-50, -50};
@@ -46,8 +46,15 @@ int main(void)
     gpuErrorCheck(cudaMalloc(&x.arr, sizeof(float) * 3));
     unsigned long size = sizeof(struct data);
     gpuErrorCheck(cudaMalloc((void **)&d_x, size));
+
     x.v = 3;
     x.dim = 2;
+    if (argc > 1) {
+        x.v = argv[1];
+    }
+    if (argc > 2) {
+        x.dim = argv[2];
+    }
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
