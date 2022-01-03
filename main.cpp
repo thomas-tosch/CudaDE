@@ -50,10 +50,10 @@ int main(int argc, char *argv[])
     x.v = 3;
     x.dim = 2;
     if (argc > 1) {
-        x.v = stoi(argv[1]);
+        x.v = std::stoi(argv[1]);
     }
     if (argc > 2) {
-        x.dim = stoi(argv[2]);
+        x.dim = std::stoi(argv[2]);
     }
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
