@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
-    DifferentialEvolution minimizer(192,50, 2, 0.9, 0.5, minBounds, maxBounds);
+    DifferentialEvolution minimizer(192,x.v, x.dim, 0.9, 0.5, minBounds, maxBounds);
 
     gpuErrorCheck(cudaMemcpy(d_x, (void *)&x, sizeof(struct data), cudaMemcpyHostToDevice));
 
