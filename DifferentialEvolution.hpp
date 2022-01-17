@@ -89,8 +89,8 @@ private:
     float *d_trial;
 
 
-    float *d_min;
-    float *d_max;
+    float d_min;
+    float d_max;
     float *h_cost;
 
     void *d_randStates;
