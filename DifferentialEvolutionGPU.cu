@@ -151,6 +151,21 @@ __device__ float rosenbrock(const float *vec, const void *args)
     return sum + 390;
 }
 
+__device__ float schwefel(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+
+    float sum = 0;
+    for (int j = 0; j < a->dim; j++) {
+        float sum2 = 0;
+        for (int i = 0; i < j; i++) {
+            sum2 += vec[i];
+        }
+        sum += pow(sum2, 2);
+    }
+    return sum;
+}
+
 
 // costFunc
 // This is a selector of the functions.
@@ -171,6 +186,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     return sphere(vec, args);
 #elif COST_SELECTOR == ROSENBROCK
     return rosenbrock(vec, args);
+#elif COST_SELECTOR == SCHWEFEL
+    return schwefel(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
