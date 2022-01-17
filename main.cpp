@@ -59,8 +59,10 @@ int main(int argc, char *argv[])
     float maxBounds[x.dim] = {0};
     std::fill_n(maxBounds, x.dim, 100);
 
+    int maxGen = (10000 * x.dim) / x.v;
+
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
-    DifferentialEvolution minimizer(192,x.v, x.dim, 0.9, 0.5, minBounds, maxBounds);
+    DifferentialEvolution minimizer(x.v,maxGen, x.dim, 0.9, 0.5, minBounds, maxBounds);
 
     gpuErrorCheck(cudaMemcpy(d_x, (void *)&x, sizeof(struct data), cudaMemcpyHostToDevice));
 
