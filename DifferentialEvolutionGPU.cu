@@ -291,8 +291,9 @@ __global__ void evolutionKernel(float *d_target,
         } // end if else for creating trial vector
         j = (j+1) % dim;
     } // end for loop through parameters
-    costArgs.nextVec = &d_trial[(idx * dim + 1) * dim];
-    float score = costFunc(&d_trial[idx*dim], costArgs);
+    const struct data *a = (struct data *)costArgs;
+    a->nextVec = &d_trial[(idx * dim + 1) * dim];
+    float score = costFunc(&d_trial[idx*dim], a);
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
