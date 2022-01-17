@@ -72,7 +72,7 @@
 #define QUATRIC 7
 
 
-#define COST_SELECTOR QUATRIC
+#define COST_SELECTOR SPHERE
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.
