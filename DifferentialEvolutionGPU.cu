@@ -140,7 +140,16 @@ __device__ float sphere(const float *vec, const void *args)
     return sum - 450;
 }
 
+__device__ float rosenbrock(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
 
+    float sum = 0;
+    for (int i = 0; i < a->dim - 1; i++) {
+        sum += (100 * pow(vec[i+1] - pow(vec[i], 2), 2) + pow((1 - vec[i]), 2));
+    }
+    return sum - 390;
+}
 
 
 // costFunc
@@ -397,7 +406,7 @@ void differentialEvolution(float *d_target,
     //std::cout << "\n\n agents = ";
     //printCudaVector(d_target, popSize*dim);
 
-    std::cout << "Best cost = " << bestCost << " bestIdx = " << bestIdx << std::endl;
+    //std::cout << "Best cost = " << bestCost << " bestIdx = " << bestIdx << std::endl;
 
     // output best minimization.
     ret = cudaMemcpy(h_output, bestIdx, sizeof(float)*dim, cudaMemcpyDeviceToHost);
