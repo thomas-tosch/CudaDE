@@ -98,13 +98,13 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
     ret = cudaMalloc(&d_cost, sizeof(float) * PopulationSize);
     gpuErrorCheck(ret);
 
-    ret = cudaMalloc(&d_min, sizeof(float) * dim);
+    ret = cudaMalloc(&d_min, sizeof(float));
     gpuErrorCheck(ret);
-    ret = cudaMalloc(&d_max, sizeof(float) * dim);
+    ret = cudaMalloc(&d_max, sizeof(float));
     gpuErrorCheck(ret);
-    ret = cudaMemcpy(d_min, minBounds, sizeof(float) * dim, cudaMemcpyHostToDevice);
+    ret = cudaMemcpy(d_min, minBounds, sizeof(float), cudaMemcpyHostToDevice);
     gpuErrorCheck(ret);
-    ret = cudaMemcpy(d_max, maxBounds, sizeof(float) * dim, cudaMemcpyHostToDevice);
+    ret = cudaMemcpy(d_max, maxBounds, sizeof(float), cudaMemcpyHostToDevice);
     gpuErrorCheck(ret);
 
     h_cost = new float[popSize * dim];
