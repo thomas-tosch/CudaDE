@@ -372,7 +372,7 @@ void differentialEvolution(float *d_target,
         //std::cout << i << ": generation = \n";
         //printCudaVector(d_target, popSize * dim);
         //std::cout << "cost = ";
-        //printCudaVector(d_cost, popSize);
+        printCudaVector(d_cost, popSize);
         //std::cout << std::endl;
 
         // start kernel for this generation
