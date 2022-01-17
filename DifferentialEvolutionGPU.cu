@@ -171,7 +171,7 @@ __device__ float quatric(const float *vec, const void *args)
     curandState_t state;
 
     /* we have to initialize the state */
-    curand_init(seed, /* the seed controls the sequence of random values that are produced */
+    curand_init(1, /* the seed controls the sequence of random values that are produced */
                 0, /* the sequence number is only important with multiple cores */
                 0, /* the offset is how much extra we advance in the sequence for each call, can be 0 */
                 &state);
