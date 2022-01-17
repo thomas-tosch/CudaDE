@@ -146,7 +146,7 @@ __device__ float rosenbrock(const float *vec, const void *args)
 
     float sum = 0;
     for (int i = 0; i < a->dim - 1; i++) {
-        sum += 100 * pow(vec[i+1] - pow(vec[i], 2), 2) + pow(1 - vec[i], 2);
+        sum += (100 * pow(vec[i+1] - pow(vec[i], 2), 2)) + pow(1 - vec[i], 2);
     }
     return sum + 390;
 }
