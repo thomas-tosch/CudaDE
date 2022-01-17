@@ -77,7 +77,7 @@
 // @param func - the cost function to minimize.
 DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerations,
                                              int Dimensions, float crossoverConstant, float mutantConstant,
-                                             float *minBounds, float *maxBounds)
+                                             float minBounds, float maxBounds)
 {
     popSize = PopulationSize;
     dim = Dimensions;

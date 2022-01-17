@@ -230,7 +230,7 @@ void printCudaVector(float *d_vec, int size)
     delete[] h_vec;
 }
 
-__global__ void generateRandomVectorAndInit(float *d_x, float *d_min, float *d_max,
+__global__ void generateRandomVectorAndInit(float *d_x, float d_min, float d_max,
                                             float *d_cost, void *costArgs, curandState_t *randStates,
                                             int popSize, int dim, unsigned long seed)
 {
