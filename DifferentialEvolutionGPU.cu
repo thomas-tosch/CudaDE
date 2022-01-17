@@ -291,7 +291,7 @@ __global__ void evolutionKernel(float *d_target,
         } // end if else for creating trial vector
         j = (j+1) % dim;
     } // end for loop through parameters
-    const struct data *args = (struct data *)costArgs;
+    struct data *args = (struct data *)costArgs;
     args->nextVec = &d_trial[(idx * dim + 1) * dim];
     float score = costFunc(&d_trial[idx*dim], args);
     if (score < d_cost[idx]) {
