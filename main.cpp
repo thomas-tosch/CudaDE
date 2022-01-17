@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
     if (argc > 2) {
         x.dim = std::stoi(argv[2]);
     }
-    float *minBounds = {-100};
-    float *maxBounds = {100};
+    float minBounds[x.dim] = {-100};
+    float maxBounds[x.dim] = {100};
     if (argc > 3) {
         minBounds[0] = std::stoi(argv[3]);
     }
