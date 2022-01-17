@@ -61,8 +61,6 @@ int main(int argc, char *argv[])
 
     int maxGen = (10000 * x.dim) / x.v;
 
-    std::cout << maxGen << std::endl;
-
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
     DifferentialEvolution minimizer(x.v,maxGen, x.dim, 0.8, 0.5, minBounds, maxBounds);
 
