@@ -67,9 +67,10 @@
 #define MANY_LOCAL_MINMA 2
 #define COST_3D 3
 #define SPHERE 4
+#define ROSENBROCK 5
 
 
-#define COST_SELECTOR SPHERE
+#define COST_SELECTOR ROSENBROCK
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.

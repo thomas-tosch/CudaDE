@@ -169,6 +169,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     return costFunctionWithManyLocalMinima(vec, args);
 #elif COST_SELECTOR == SPHERE
     return sphere(vec, args);
+#elif COST_SELECTOR == ROSENBROCK
+    return rosenbrock(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
