@@ -51,13 +51,13 @@ int main(int argc, char *argv[])
     if (argc > 2) {
         x.dim = std::stoi(argv[2]);
     }
-    float minBounds = -100;
-    float maxBounds = 100;
+    float *minBounds = {-100};
+    float *maxBounds = {100};
     if (argc > 3) {
-        minBounds = std::stoi(argv[3]);
+        minBounds[0] = std::stoi(argv[3]);
     }
     if (argc > 4) {
-        maxBounds = std::stoi(argv[4]);
+        maxBounds[0] = std::stoi(argv[4]);
     }
 
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));

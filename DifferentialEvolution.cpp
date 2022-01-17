@@ -77,7 +77,7 @@
 // @param func - the cost function to minimize.
 DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerations,
                                              int Dimensions, float crossoverConstant, float mutantConstant,
-                                             float minBounds, float maxBounds)
+                                             float *minBounds, float *maxBounds)
 {
     popSize = PopulationSize;
     dim = Dimensions;
@@ -98,13 +98,13 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
     ret = cudaMalloc(&d_cost, sizeof(float) * PopulationSize);
     gpuErrorCheck(ret);
 
-    ret = cudaMalloc(&d_min, sizeof(float) * 1);
+    ret = cudaMalloc(&d_min, sizeof(float) * dim);
     gpuErrorCheck(ret);
-    ret = cudaMalloc(&d_max, sizeof(float) * 1);
+    ret = cudaMalloc(&d_max, sizeof(float) * dim);
     gpuErrorCheck(ret);
-    ret = cudaMemcpy(d_min, minBounds, sizeof(float) * 1, cudaMemcpyHostToDevice);
+    ret = cudaMemcpy(d_min, minBounds, sizeof(float) * dim, cudaMemcpyHostToDevice);
     gpuErrorCheck(ret);
-    ret = cudaMemcpy(d_max, maxBounds, sizeof(float) * 1, cudaMemcpyHostToDevice);
+    ret = cudaMemcpy(d_max, maxBounds, sizeof(float) * dim, cudaMemcpyHostToDevice);
     gpuErrorCheck(ret);
 
     h_cost = new float[popSize * dim];
