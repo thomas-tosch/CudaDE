@@ -293,7 +293,6 @@ __global__ void evolutionKernel(float *d_target,
     } // end for loop through parameters
 
     float score = costFunc(&d_trial[idx*dim], costArgs);
-    std::cout << COST_SELECTOR << std::endl;
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
@@ -409,6 +408,7 @@ void differentialEvolution(float *d_target,
     //std::cout << "\n\n agents = ";
     //printCudaVector(d_target, popSize*dim);
 
+    std::cout << COST_SELECTOR << std::endl;
     std::cout << "Best cost = " << bestCost << " bestIdx = " << bestIdx << std::endl;
 
     // output best minimization
