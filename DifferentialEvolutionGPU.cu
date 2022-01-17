@@ -214,7 +214,7 @@ __global__ void generateRandomVectorAndInit(float *d_x, float *d_min, float *d_m
         d_x[(idx*dim) + i] = (curand_uniform(state) * (d_max[i] - d_min[i])) + d_min[i];
     }
 
-    d_cost[idx] = costFunc(&d_x[idx*dim], costArgs, &d_x[(idx * dim + 1) * dim]);
+    d_cost[idx] = costFunc(&d_x[idx*dim], costArgs);
 }
 
 
@@ -291,7 +291,7 @@ __global__ void evolutionKernel(float *d_target,
         } // end if else for creating trial vector
         j = (j+1) % dim;
     } // end for loop through parameters
-    float score = costFunc(&d_trial[idx*dim], costArgs, &d_trial[(idx * dim + 1) * dim]);
+    float score = costFunc(&d_trial[idx*dim], costArgs);
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
