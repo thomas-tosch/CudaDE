@@ -78,7 +78,7 @@ struct data {
     float *arr;
     float v;
     int dim;
-
+    const float *nextVec;
 };
 
 class DifferentialEvolution {

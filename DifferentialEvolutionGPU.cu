@@ -160,7 +160,7 @@ __device__ float rosenbrock(const float *vec, const void *args, const float *nex
 // also function pointers in CUDA are complex to work with, and particulary with the
 // architecture used where a standard C++ class is used to wrap the CUDA kernels and
 // handle most of the memory mangement used.
-__device__ float costFunc(const float *vec, const void *args, const float *nextVec = nullptr) {
+__device__ float costFunc(const float *vec, const void *args) {
 #if COST_SELECTOR == QUADRATIC_COST
     return quadraticFunc(vec, args);
 #elif COST_SELECTOR == COST_WITH_ARGS
@@ -170,7 +170,7 @@ __device__ float costFunc(const float *vec, const void *args, const float *nextV
 #elif COST_SELECTOR == SPHERE
     return sphere(vec, args);
 #elif COST_SELECTOR == ROSENBROCK
-    return rosenbrock(vec, args, nextVec);
+    return rosenbrock(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
@@ -291,7 +291,8 @@ __global__ void evolutionKernel(float *d_target,
         } // end if else for creating trial vector
         j = (j+1) % dim;
     } // end for loop through parameters
-    float score = costFunc(&d_trial[idx*dim], costArgs, &d_trial[(idx * dim + 1) * dim]);
+    costArgs.nextVec = &d_trial[(idx * dim + 1) * dim];
+    float score = costFunc(&d_trial[idx*dim], costArgs);
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
@@ -371,7 +372,7 @@ void differentialEvolution(float *d_target,
         //std::cout << i << ": generation = \n";
         //printCudaVector(d_target, popSize * dim);
         //std::cout << "cost = ";
-        printCudaVector(d_cost, popSize);
+        //printCudaVector(d_cost, popSize);
         //std::cout << std::endl;
 
         // start kernel for this generation
