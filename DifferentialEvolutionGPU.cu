@@ -240,7 +240,7 @@ __global__ void generateRandomVectorAndInit(float *d_x, float d_min, float d_max
     curandState_t *state = &randStates[idx];
     curand_init(seed, idx,0,state);
     for (int i = 0; i < dim; i++) {
-        d_x[(idx*dim) + i] = (curand_uniform(state) * (d_max - d_min)) + d_min;
+        d_x[(idx*dim) + i] = (curand_uniform(state) * (d_max[0] - d_min[0])) + d_min[0];
     }
 
     d_cost[idx] = costFunc(&d_x[idx*dim], costArgs);
