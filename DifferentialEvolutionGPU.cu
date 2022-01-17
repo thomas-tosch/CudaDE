@@ -172,7 +172,7 @@ __device__ float quatric(const float *vec, const void *args)
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
-        sum += i * pow(vec[i], 2) + rand() ;
+        sum += i * pow(vec[i], 4) + rand();
     }
     return sum;
 }
@@ -198,6 +198,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     return rosenbrock(vec, args);
 #elif COST_SELECTOR == SCHWEFEL
     return schwefel(vec, args);
+#elif COST_SELECTOR == QUATRIC
+    return quatric(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
