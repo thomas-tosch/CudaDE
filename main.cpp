@@ -33,10 +33,6 @@
 
 int main(int argc, char *argv[])
 {
-    // create the min and max bounds for the search space.
-    float minBounds[2] = {-100, -100};
-    float maxBounds[2] = {100, 100};
-
     // a random array or data that gets passed to the cost function.
     float arr[3] = {2.5, 2.6, 2.7};
 
@@ -56,6 +52,12 @@ int main(int argc, char *argv[])
         x.dim = std::stoi(argv[2]);
     }
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
+
+    // create the min and max bounds for the search space.
+    float minBounds[dim] = {0};
+    std::fill_n(minBounds, dim, -100);
+    float maxBounds[dim] = {0};
+    std::fill_n(maxBounds, dim, 100);
 
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
     DifferentialEvolution minimizer(192,x.v, x.dim, 0.9, 0.5, minBounds, maxBounds);
