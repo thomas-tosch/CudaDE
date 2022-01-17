@@ -51,13 +51,18 @@ int main(int argc, char *argv[])
     if (argc > 2) {
         x.dim = std::stoi(argv[2]);
     }
+    float minBounds = -100;
+    float maxBounds = 100;
+    if (argc > 3) {
+        minBounds = std::stoi(argv[3]);
+    }
+    if (argc > 4) {
+        maxBounds = std::stoi(argv[4]);
+    }
+
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
 
     // create the min and max bounds for the search space.
-    float minBounds[x.dim] = {0};
-    std::fill_n(minBounds, x.dim, -100);
-    float maxBounds[x.dim] = {0};
-    std::fill_n(maxBounds, x.dim, 100);
 
     int maxGen = (10000 * x.dim) / x.v;
 

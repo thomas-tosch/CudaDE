@@ -166,6 +166,16 @@ __device__ float schwefel(const float *vec, const void *args)
     return sum;
 }
 
+__device__ float quatric(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+
+    float sum = 0;
+    for (int i = 0; i < a->dim; i++) {
+        sum += i * pow(vec[i], 2) + rand() ;
+    }
+    return sum;
+}
 
 // costFunc
 // This is a selector of the functions.
@@ -228,7 +238,7 @@ __global__ void generateRandomVectorAndInit(float *d_x, float *d_min, float *d_m
     curandState_t *state = &randStates[idx];
     curand_init(seed, idx,0,state);
     for (int i = 0; i < dim; i++) {
-        d_x[(idx*dim) + i] = (curand_uniform(state) * (d_max[i] - d_min[i])) + d_min[i];
+        d_x[(idx*dim) + i] = (curand_uniform(state) * (d_max - d_min)) + d_min;
     }
 
     d_cost[idx] = costFunc(&d_x[idx*dim], costArgs);
