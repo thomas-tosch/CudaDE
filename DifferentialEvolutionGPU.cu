@@ -214,7 +214,7 @@ __global__ void generateRandomVectorAndInit(float *d_x, float *d_min, float *d_m
         d_x[(idx*dim) + i] = (curand_uniform(state) * (d_max[i] - d_min[i])) + d_min[i];
     }
 
-    d_cost[idx] = costFunc(&d_x[idx*dim], costArgs, &d_trial[(idx * dim + 1) * dim]);
+    d_cost[idx] = costFunc(&d_x[idx*dim], costArgs, &d_x[(idx * dim + 1) * dim]);
 }
 
 
