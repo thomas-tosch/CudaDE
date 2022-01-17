@@ -140,13 +140,13 @@ __device__ float sphere(const float *vec, const void *args)
     return sum + (-450);
 }
 
-__device__ float rosenbrock(const float *vec, const void *args)
+__device__ float rosenbrock(const float *vec, const void *args, const float *nextVec)
 {
     const struct data *a = (struct data *)args;
 
     float sum = 0;
     for (int i = 0; i < a->dim - 1; i++) {
-        sum += 100 * pow(a->nextVec[i] - pow(vec[i], 2), 2) + pow(1 - vec[i], 2);
+        sum += 100 * pow(nextVec[i] - pow(vec[i], 2), 2) + pow(1 - vec[i], 2);
     }
     return sum + 390;
 }
@@ -160,7 +160,7 @@ __device__ float rosenbrock(const float *vec, const void *args)
 // also function pointers in CUDA are complex to work with, and particulary with the
 // architecture used where a standard C++ class is used to wrap the CUDA kernels and
 // handle most of the memory mangement used.
-__device__ float costFunc(const float *vec, const void *args) {
+__device__ float costFunc(const float *vec, const void *args, const float *nextVec = nullptr) {
 #if COST_SELECTOR == QUADRATIC_COST
     return quadraticFunc(vec, args);
 #elif COST_SELECTOR == COST_WITH_ARGS
@@ -170,7 +170,7 @@ __device__ float costFunc(const float *vec, const void *args) {
 #elif COST_SELECTOR == SPHERE
     return sphere(vec, args);
 #elif COST_SELECTOR == ROSENBROCK
-    return rosenbrock(vec, args);
+    return rosenbrock(vec, args, nextVec);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
@@ -291,9 +291,7 @@ __global__ void evolutionKernel(float *d_target,
         } // end if else for creating trial vector
         j = (j+1) % dim;
     } // end for loop through parameters
-    struct data *args = (struct data *)costArgs;
-    args->nextVec = &d_trial[(idx * dim + 1) * dim];
-    float score = costFunc(&d_trial[idx*dim], args);
+    float score = costFunc(&d_trial[idx*dim], costArgs, &d_trial[(idx * dim + 1) * dim]);
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
