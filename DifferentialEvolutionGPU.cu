@@ -148,7 +148,6 @@ __device__ float rosenbrock(const float *vec, const void *args)
     for (int i = 0; i < a->dim - 1; i++) {
         sum += (100 * pow(vec[i+1] - pow(vec[i], 2), 2) + pow((1 - vec[i]), 2));
     }
-    std::cout << sum << std::endl;
     return sum - 390;
 }
 
@@ -348,10 +347,10 @@ void differentialEvolution(float *d_target,
     int power32 = ceil(popSize / 32.0) * 32;
     //std::cout << "power32 = " << power32 << std::endl;
 
-    std::cout << "min bounds = ";
-    printCudaVector(d_min, dim);
-    std::cout << "max bounds = ";
-    printCudaVector(d_max, dim);
+    //std::cout << "min bounds = ";
+    //printCudaVector(d_min, dim);
+    //std::cout << "max bounds = ";
+    //printCudaVector(d_max, dim);
 
     //std::cout << "Random vector" << std::endl;
     //printCudaVector(d_target, popSize*dim);
