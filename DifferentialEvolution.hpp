@@ -116,7 +116,7 @@ public:
     // @param func - the cost function to minimize.
     DifferentialEvolution(int PopulationSize, int NumGenerations, int Dimensions,
                           float crossoverConstant, float mutantConstant,
-                          float *minBounds, float *maxBounds);
+                          float minBounds, float maxBounds);
 
     // fmin
     // wrapper to the cuda function C function for differential evolution.
