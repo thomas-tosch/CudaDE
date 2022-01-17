@@ -172,7 +172,7 @@ __device__ float quatric(const float *vec, const void *args)
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
-        sum += i * pow(vec[i], 4) + rand();
+        sum += i * pow(vec[i], 4) + curand();
     }
     return sum;
 }
