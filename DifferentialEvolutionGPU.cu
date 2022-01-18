@@ -204,8 +204,8 @@ __device__ float griewank(const float *vec, const void *args)
         sum += pow(vec[i], 2) / 4000;
     }
     float mult = 1;
-    for (int i = 0; i < a->dim; i++) {
-        mult *= cos(vec[i] / sqrt((float)i)) + 1;
+    for (float i = 0; i < a->dim; i++) {
+        mult *= cos(vec[i] / sqrt(i)) + 1;
     }
     return sum - mult - 180;
 }
