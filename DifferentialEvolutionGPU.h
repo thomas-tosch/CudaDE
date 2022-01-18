@@ -74,7 +74,7 @@
 #define GRIEWANK 8
 
 
-#define COST_SELECTOR GRIWANK
+#define COST_SELECTOR GRIEWANK
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.
