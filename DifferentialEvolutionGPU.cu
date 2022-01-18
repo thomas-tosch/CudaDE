@@ -262,9 +262,6 @@ __device__ float costFunc(const float *vec, const void *args) {
     { return griewank(vec, args); }
     else if (a->costFun == RASTRIGIN)
     { return rastrigin(vec, args); }
-    else {
-        std::cout << "Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc" << std::endl;
-    }
 }
 
 
