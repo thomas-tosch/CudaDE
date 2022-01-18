@@ -367,7 +367,7 @@ __global__ void evolutionKernel(float *d_target,
             bestIdx = i;
         }
     }
-    printf(best);
+    printf("%.6f", best);
     printf("\n");
 
     ///////////////////// MUTATION ////////////////
