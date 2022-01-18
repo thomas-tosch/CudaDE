@@ -196,6 +196,20 @@ __device__ float ackley(const float *vec, const void *args)
     return 20 + expf(1) - 20 * expf(-0.2 * sqrt((1 / a->dim) * sum)) - expf((1 / a->dim) * sum2);
 }
 
+__device__ float griwank(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+    float sum = 0;
+    for (int i = 0; i < a->dim; i++) {
+        sum += pow(vec[i], 2) / 4000;
+    }
+    float mult = 1;
+    for (int i = 0; i < a->dim; i++) {
+        mult *= cos(vec[i] / sqrt(i)) + 1;
+    }
+    return sum - mult;
+}
+
 // costFunc
 // This is a selector of the functions.
 // Although this code is great for usabilty, by using the preprocessor directives
