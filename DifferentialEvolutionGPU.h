@@ -71,7 +71,7 @@
 #define SCHWEFEL 6
 #define QUATRIC 7
 #define ACKLEY 8
-#define GRIEWANK 8
+#define GRIEWANK 9
 
 
 #define COST_SELECTOR GRIEWANK
