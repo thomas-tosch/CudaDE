@@ -299,6 +299,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     { return schwefelFunc(vec, args); }
     else if (a->costFun == SALOMON)
     { return salomon(vec, args); }
+    else if (a->costFun == WHITELY)
+    { return whitely(vec, args); }
     return 0;
 }
 
