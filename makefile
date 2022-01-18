@@ -1,5 +1,5 @@
 all:
-	nvcc -o programDE main.cpp DifferentialEvolution.cpp DifferentialEvolutionGPU.cu --expt-relaxed-constexpr
+	nvcc --expt-relaxed-constexpr -o programDE main.cpp DifferentialEvolution.cpp DifferentialEvolutionGPU.cu
 
 
 clean:
