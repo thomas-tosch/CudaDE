@@ -227,9 +227,9 @@ __device__ float schwefelFunc(const float *vec, const void *args)
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
-        sum += pow(vec[i], 2) - 10 * cos(2 * M_PI * vec[i]);
+        sum += vec[i] * sin(sqrt((float)abs(vec[i])))
     }
-    return 10 * a->dim + sum;
+    return 418.9829 * a->dim - sum;
 }
 
 // costFunc
@@ -262,6 +262,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     { return griewank(vec, args); }
     else if (a->costFun == RASTRIGIN)
     { return rastrigin(vec, args); }
+    else if (a->costFun == SCHWEFELFUNC)
+    { return schwefelFunc(vec, args); }
     return 0;
 }
 

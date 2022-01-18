@@ -73,6 +73,7 @@
 #define ACKLEY 8
 #define GRIEWANK 9
 #define RASTRIGIN 10
+#define SCHWEFELFUNC 11
 
 
 #define COST_SELECTOR RASTRIGIN
