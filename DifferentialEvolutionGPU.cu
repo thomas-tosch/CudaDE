@@ -360,9 +360,9 @@ __global__ void evolutionKernel(float *d_target,
     float F4 = 0.2;
 
     float best = FLT_MAX;
-    int bestIdx = 0;
+    int bestIdx = -1;
     for (int i = 0; i < popSize * dim; i++) {
-        if (d_cost[i] < best) {
+        if (d_cost[i] <= best) {
             best = d_cost[i];
             bestIdx = i;
         }
