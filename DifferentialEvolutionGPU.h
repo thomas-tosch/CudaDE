@@ -71,9 +71,10 @@
 #define SCHWEFEL 6
 #define QUATRIC 7
 #define ACKLEY 8
+#define GRIEWANK 8
 
 
-#define COST_SELECTOR ACKLEY
+#define COST_SELECTOR GRIWANK
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.

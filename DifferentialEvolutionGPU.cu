@@ -196,7 +196,7 @@ __device__ float ackley(const float *vec, const void *args)
     return 20 + expf(1) - 20 * expf(-0.2 * sqrt((1 / a->dim) * sum)) - expf((1 / a->dim) * sum2);
 }
 
-__device__ float griwank(const float *vec, const void *args)
+__device__ float griewank(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
     float sum = 0;
@@ -235,6 +235,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     return quatric(vec, args);
 #elif COST_SELECTOR == ACKLEY
     return ackley(vec, args);
+#elif COST_SELECTOR == GRIEWANK
+    return griewank(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif
