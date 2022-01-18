@@ -207,7 +207,7 @@ __device__ float griewank(const float *vec, const void *args)
     for (int i = 0; i < a->dim; i++) {
         mult *= cos(vec[i] / sqrt((float)i)) + 1;
     }
-    return sum - mult;
+    return sum - mult - 180;
 }
 
 // costFunc
