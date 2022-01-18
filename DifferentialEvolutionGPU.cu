@@ -252,15 +252,15 @@ __device__ float costFunc(const float *vec, const void *args) {
     { return sphere(vec, args); }
     else if (a->costfun == ROSENBROCK)
     { return rosenbrock(vec, args); }
-    else if (a->costfun == SCHWEFEL)
+    else if (a->costFun == SCHWEFEL)
     { return schwefel(vec, args); }
-    else if (a->costfun == QUATRIC)
+    else if (a->costFun == QUATRIC)
     { return quatric(vec, args); }
-    else if (a->costfun == ACKLEY)
+    else if (a->costFun == ACKLEY)
     { return ackley(vec, args); }
-    else if (a->costfun == GRIEWANK)
+    else if (a->costFun == GRIEWANK)
     { return griewank(vec, args); }
-    else if (a->costfun == RASTRIGIN)
+    else if (a->costFun == RASTRIGIN)
     { return rastrigin(vec, args); }
     else {
         std::cout << "Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc" << std::endl;
