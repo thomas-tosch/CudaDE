@@ -70,9 +70,10 @@
 #define ROSENBROCK 5
 #define SCHWEFEL 6
 #define QUATRIC 7
+#define ACKLEY 8
 
 
-#define COST_SELECTOR QUATRIC
+#define COST_SELECTOR ACKLEY
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.
