@@ -367,8 +367,7 @@ __global__ void evolutionKernel(float *d_target,
             bestIdx = i;
         }
     }
-    printf("%.6f", best);
-    printf("\n");
+    printf("%.6f \n", best);
 
     ///////////////////// MUTATION ////////////////
     for (int k = 1; k <= dim; k++) {
