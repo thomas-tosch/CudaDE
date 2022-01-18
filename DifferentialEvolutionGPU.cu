@@ -243,25 +243,25 @@ __device__ float rastrigin(const float *vec, const void *args)
 __device__ float costFunc(const float *vec, const void *args) {
     const struct data *a = (struct data *)args;
     if a->costFun == QUADRATIC_COST
-        return quadraticFunc(vec, args);
+    { return quadraticFunc(vec, args); }
     else if a->costfun == COST_WITH_ARGS
-        return costWithArgs(vec, args);
+    { return costWithArgs(vec, args); }
     else if a->costfun == MANY_LOCAL_MINMA
-        return costFunctionWithManyLocalMinima(vec, args);
+    { return costFunctionWithManyLocalMinima(vec, args); }
     else if a->costfun == SPHERE
-        return sphere(vec, args);
+    { return sphere(vec, args); }
     else if a->costfun == ROSENBROCK
-        return rosenbrock(vec, args);
+    { return rosenbrock(vec, args); }
     else if a->costfun == SCHWEFEL
-        return schwefel(vec, args);
+    { return schwefel(vec, args); }
     else if a->costfun == QUATRIC
-        return quatric(vec, args);
+    { return quatric(vec, args); }
     else if a->costfun == ACKLEY
-        return ackley(vec, args);
+    { return ackley(vec, args); }
     else if a->costfun == GRIEWANK
-        return griewank(vec, args);
+    { return griewank(vec, args); }
     else if a->costfun == RASTRIGIN
-        return rastrigin(vec, args);
+    { return rastrigin(vec, args); }
     else {
         std::cout << "Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc" << std::endl;
     }
