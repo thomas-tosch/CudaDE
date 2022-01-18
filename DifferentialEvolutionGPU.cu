@@ -500,7 +500,7 @@ void differentialEvolution(float *d_target,
     //std::cout << "\n\n agents = ";
     //printCudaVector(d_target, popSize*dim);
 
-    const struct data *a = (struct data *)args;
+    const struct data *a = (struct data *)costArgs;
     std::cout << a->costFun << std::endl;
     std::cout << "Best cost = " << bestCost << " bestIdx = " << bestIdx << std::endl;
 
