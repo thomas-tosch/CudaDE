@@ -78,6 +78,7 @@ struct data {
     float *arr;
     float v;
     int dim;
+    int costFun;
 };
 
 class DifferentialEvolution {

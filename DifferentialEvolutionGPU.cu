@@ -221,6 +221,17 @@ __device__ float rastrigin(const float *vec, const void *args)
     return 10 * a->dim + sum;
 }
 
+__device__ float rastrigin(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+
+    float sum = 0;
+    for (int i = 0; i < a->dim; i++) {
+        sum += pow(vec[i], 2) - 10 * cos(2 * M_PI * vec[i]);
+    }
+    return 10 * a->dim + sum;
+}
+
 // costFunc
 // This is a selector of the functions.
 // Although this code is great for usabilty, by using the preprocessor directives
@@ -230,29 +241,30 @@ __device__ float rastrigin(const float *vec, const void *args)
 // architecture used where a standard C++ class is used to wrap the CUDA kernels and
 // handle most of the memory mangement used.
 __device__ float costFunc(const float *vec, const void *args) {
-#if COST_SELECTOR == QUADRATIC_COST
-    return quadraticFunc(vec, args);
-#elif COST_SELECTOR == COST_WITH_ARGS
-    return costWithArgs(vec, args);
-#elif COST_SELECTOR == MANY_LOCAL_MINMA
-    return costFunctionWithManyLocalMinima(vec, args);
-#elif COST_SELECTOR == SPHERE
-    return sphere(vec, args);
-#elif COST_SELECTOR == ROSENBROCK
-    return rosenbrock(vec, args);
-#elif COST_SELECTOR == SCHWEFEL
-    return schwefel(vec, args);
-#elif COST_SELECTOR == QUATRIC
-    return quatric(vec, args);
-#elif COST_SELECTOR == ACKLEY
-    return ackley(vec, args);
-#elif COST_SELECTOR == GRIEWANK
-    return griewank(vec, args);
-#elif COST_SELECTOR == RASTRIGIN
-    return rastrigin(vec, args);
-#else
-#error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
-#endif
+    const struct data *a = (struct data *)args;
+    if a->costFun == QUADRATIC_COST
+        return quadraticFunc(vec, args);
+    else if a->costfun == COST_WITH_ARGS
+        return costWithArgs(vec, args);
+    else if a->costfun == MANY_LOCAL_MINMA
+        return costFunctionWithManyLocalMinima(vec, args);
+    else if a->costfun == SPHERE
+        return sphere(vec, args);
+    else if a->costfun == ROSENBROCK
+        return rosenbrock(vec, args);
+    else if a->costfun == SCHWEFEL
+        return schwefel(vec, args);
+    else if a->costfun == QUATRIC
+        return quatric(vec, args);
+    else if a->costfun == ACKLEY
+        return ackley(vec, args);
+    else if a->costfun == GRIEWANK
+        return griewank(vec, args);
+    else if a->costfun == RASTRIGIN
+        return rastrigin(vec, args);
+    else {
+        std::cout << "Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc" << std::endl;
+    }
 }
 
 

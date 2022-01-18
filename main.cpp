@@ -45,19 +45,23 @@ int main(int argc, char *argv[])
 
     x.v = 3;
     x.dim = 2;
+    x.costFun = 1;
     if (argc > 1) {
         x.v = std::stoi(argv[1]);
     }
     if (argc > 2) {
         x.dim = std::stoi(argv[2]);
     }
+    if (argc > 3) {
+        x.costFun = std::stoi(argv[3]);
+    }
     float minBounds[x.dim] = {-100};
     float maxBounds[x.dim] = {100};
-    if (argc > 3) {
-        minBounds[0] = std::stoi(argv[3]);
-    }
     if (argc > 4) {
-        maxBounds[0] = std::stoi(argv[4]);
+        minBounds[0] = std::stoi(argv[4]);
+    }
+    if (argc > 5) {
+        maxBounds[0] = std::stoi(argv[5]);
     }
 
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
