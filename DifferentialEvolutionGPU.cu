@@ -485,7 +485,7 @@ void differentialEvolution(float *d_target,
     float bestCost = FLT_MAX;
     for (int i = 0; i < popSize; i++) {
         float curCost = h_cost[i];
-        //std::cout << curCost << ", ";
+        std::cout << curCost << ", ";
         if (curCost < bestCost) {
             bestCost = curCost;
             bestIdx = i;
