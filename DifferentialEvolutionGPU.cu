@@ -193,7 +193,7 @@ __device__ float ackley(const float *vec, const void *args)
     for (int i = 0; i < a->dim; i++) {
         sum2 += cos(2 * M_PI * vec[i]);
     }
-    return 20 + exp(1) - 20 * exp(-0.2 * sqrt((1 / a->dim) * sum)) - exp((1 / a->dim) * sum2);
+    return 20 + expf(1) - 20 * expf(-0.2 * sqrt((1 / a->dim) * sum)) - expf((1 / a->dim) * sum2);
 }
 
 // costFunc
