@@ -207,7 +207,21 @@ __device__ float griewank(const float *vec, const void *args)
     for (int i = 1; i < a->dim + 1; i++) {
         mult *= cos(vec[i - 1] / sqrtf((float)i)) + 1;
     }
-    return sum - mult - 180;
+    return (sum - mult) - 180;
+}
+
+__device__ float rastrigin(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+    float sum = 0;
+    for (int i = 0; i < a->dim; i++) {
+        sum += pow(vec[i], 2) / 4000;
+    }
+    float mult = 1;
+    for (int i = 1; i < a->dim + 1; i++) {
+        mult *= cos(vec[i - 1] / sqrtf((float)i)) + 1;
+    }
+    return (sum - mult) - 180;
 }
 
 // costFunc
@@ -237,6 +251,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     return ackley(vec, args);
 #elif COST_SELECTOR == GRIEWANK
     return griewank(vec, args);
+#elif COST_SELECTOR == RASTRIGIN
+    return rastrigin(vec, args);
 #else
 #error Bad cost_selector given to costFunc in DifferentialEvolution function: costFunc
 #endif

@@ -72,9 +72,10 @@
 #define QUATRIC 7
 #define ACKLEY 8
 #define GRIEWANK 9
+#define RASTRIGIN 10
 
 
-#define COST_SELECTOR GRIEWANK
+#define COST_SELECTOR RASTRIGIN
 
 // A basic macro used to checking cuda errors.
 // @param ans - the most recent enumerated cuda error to check.
