@@ -76,6 +76,7 @@
 #define SCHWEFELFUNC 11
 #define SALOMON 12
 #define WHITELY 13
+#define WEIERSTRASS 14
 
 
 #define COST_SELECTOR RASTRIGIN
