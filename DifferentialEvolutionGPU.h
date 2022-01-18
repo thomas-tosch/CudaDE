@@ -74,6 +74,7 @@
 #define GRIEWANK 9
 #define RASTRIGIN 10
 #define SCHWEFELFUNC 11
+#define SALOMON 12
 
 
 #define COST_SELECTOR RASTRIGIN

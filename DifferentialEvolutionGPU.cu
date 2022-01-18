@@ -232,6 +232,23 @@ __device__ float schwefelFunc(const float *vec, const void *args)
     return 418.9829 * a->dim - sum;
 }
 
+__device__ float salomon(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+
+    float sum = 0;
+    for (int i = 0; i < a->dim; i++) {
+        sum += pow(vec[i], 2);
+    }
+
+    float sum2 = 0;
+    for (int i = 0; i < a->dim; i++) {
+        sum2 += pow(vec[i], 2) + 1;
+    }
+
+    return -cos(2*M_PI*sqrt((float)sum)) + 0.1 * sqrt((float) sum2);
+}
+
 // costFunc
 // This is a selector of the functions.
 // Although this code is great for usabilty, by using the preprocessor directives
@@ -264,6 +281,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     { return rastrigin(vec, args); }
     else if (a->costFun == SCHWEFELFUNC)
     { return schwefelFunc(vec, args); }
+    else if (a->costFun == SALOMON)
+    { return salomon(vec, args); }
     return 0;
 }
 
