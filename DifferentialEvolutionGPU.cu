@@ -244,13 +244,13 @@ __device__ float costFunc(const float *vec, const void *args) {
     const struct data *a = (struct data *)args;
     if (a->costFun == QUADRATIC_COST)
     { return quadraticFunc(vec, args); }
-    else if (a->costfun == COST_WITH_ARGS)
+    else if (a->costFun == COST_WITH_ARGS)
     { return costWithArgs(vec, args); }
-    else if (a->costfun == MANY_LOCAL_MINMA)
+    else if (a->costFun == MANY_LOCAL_MINMA)
     { return costFunctionWithManyLocalMinima(vec, args); }
-    else if (a->costfun == SPHERE)
+    else if (a->costFun == SPHERE)
     { return sphere(vec, args); }
-    else if (a->costfun == ROSENBROCK)
+    else if (a->costFun == ROSENBROCK)
     { return rosenbrock(vec, args); }
     else if (a->costFun == SCHWEFEL)
     { return schwefel(vec, args); }
