@@ -134,7 +134,7 @@ __device__ float sphere(const float *vec, const void *args)
     const struct data *a = (struct data *)args;
 
     float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
+    for (int i = 0; i < a->dim - 1; i++) {
         sum += vec[i] * vec[i];
     }
     return sum + (-450);
@@ -145,7 +145,7 @@ __device__ float rosenbrock(const float *vec, const void *args)
     const struct data *a = (struct data *)args;
 
     float sum = 0;
-    for (int i = 0; i < a->dim - 1; i++) {
+    for (int i = 0; i < a->dim - 2; i++) {
         sum += (100 * pow(vec[i+1] - pow(vec[i], 2), 2)) + pow(1 - vec[i], 2);
     }
     return sum + 390;
@@ -156,7 +156,7 @@ __device__ float schwefel(const float *vec, const void *args)
     const struct data *a = (struct data *)args;
 
     float sum = 0;
-    for (int j = 0; j < a->dim; j++) {
+    for (int j = 0; j < a->dim - 1; j++) {
         float sum2 = 0;
         for (int i = 0; i < j; i++) {
             sum2 += vec[i];
@@ -175,8 +175,8 @@ __device__ float quatric(const float *vec, const void *args)
                 &state);
     const struct data *a = (struct data *)args;
     float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum += i * pow(vec[i], 4) + curand(&state) % 1;
+    for (int i = 1; i < a->dim ; i++) {
+        sum += i * pow(vec[i - 1], 4) + curand(&state) % 1;
     }
     return sum;
 }
@@ -186,11 +186,11 @@ __device__ float ackley(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
     float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
+    for (int i = 0; i < a->dim - 1; i++) {
         sum += pow(vec[i], 2);
     }
     float sum2 = 0;
-    for (int i = 0; i < a->dim; i++) {
+    for (int i = 0; i < a->dim - 1; i++) {
         sum2 += cos(2 * M_PI * vec[i]);
     }
     return 20 + expf(1) - 20 * expf(-0.2 * sqrt((1 / a->dim) * sum)) - expf((1 / a->dim) * sum2);
@@ -200,11 +200,11 @@ __device__ float griewank(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
     float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
+    for (int i = 0; i < a->dim - 1; i++) {
         sum += pow(vec[i], 2) / 4000;
     }
     float mult = 1;
-    for (int i = 1; i < a->dim + 1; i++) {
+    for (int i = 1; i < a->dim; i++) {
         mult *= cos(vec[i - 1] / sqrtf((float)i)) + 1;
     }
     return (sum - mult) - 180;
@@ -215,7 +215,7 @@ __device__ float rastrigin(const float *vec, const void *args)
     const struct data *a = (struct data *)args;
 
     float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
+    for (int i = 1; i < a->dim - 1; i++) {
         sum += pow(vec[i], 2) - 10 * cos(2 * M_PI * vec[i]);
     }
     return 10 * a->dim + sum;
