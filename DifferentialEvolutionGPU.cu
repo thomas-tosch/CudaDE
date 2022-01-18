@@ -491,7 +491,7 @@ void differentialEvolution(float *d_target,
             bestIdx = i;
         }
     }
-    //std::cout << "}" << std::endl;
+    std::cout << "}" << std::endl;
 
     //std::cout << "\n\n agents = ";
     //printCudaVector(d_target, popSize*dim);
