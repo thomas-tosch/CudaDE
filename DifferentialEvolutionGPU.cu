@@ -367,7 +367,7 @@ __global__ void evolutionKernel(float *d_target,
             bestIdx = i;
         }
     }
-    printf("%d", sizeof(d_cost)/sizeof(*d_cost));
+    printf("%d", sizeof d_cost / sizeof d_cost[0]);
     printf("%.6f \n", best);
 
     ///////////////////// MUTATION ////////////////
