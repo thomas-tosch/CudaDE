@@ -500,7 +500,7 @@ void differentialEvolution(float *d_target,
     //std::cout << "\n\n agents = ";
     //printCudaVector(d_target, popSize*dim);
 
-    std::cout << COST_SELECTOR << std::endl;
+    std::cout << costArgs->costFun << std::endl;
     std::cout << "Best cost = " << bestCost << " bestIdx = " << bestIdx << std::endl;
 
     // output best minimization
