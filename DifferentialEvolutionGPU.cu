@@ -221,7 +221,7 @@ __device__ float rastrigin(const float *vec, const void *args)
     return 10 * a->dim + sum;
 }
 
-__device__ float rastrigin(const float *vec, const void *args)
+__device__ float schwefelFunc(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
 
@@ -262,6 +262,7 @@ __device__ float costFunc(const float *vec, const void *args) {
     { return griewank(vec, args); }
     else if (a->costFun == RASTRIGIN)
     { return rastrigin(vec, args); }
+    return 0;
 }
 
 
