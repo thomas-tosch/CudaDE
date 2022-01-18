@@ -249,6 +249,22 @@ __device__ float salomon(const float *vec, const void *args)
     return -cos(2*M_PI*sqrt((float)sum)) + 0.1 * sqrt((float) sum2);
 }
 
+__device__ float whitely(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+    float sum = 0;
+    float total = 0;
+    for (int j = 0; j < a->dim; i++) {
+        sum = 0;
+        for (int i = 0; i <= j; j++) {
+            y = 100 * pow(vec[j] - pow(vec[i], 2), 2) + pow(1 - vec[î], 2);
+            sum += ((y / 4000) - cos(y) + 1);
+        }
+        total += sum;
+    }
+    return total;
+}
+
 // costFunc
 // This is a selector of the functions.
 // Although this code is great for usabilty, by using the preprocessor directives
