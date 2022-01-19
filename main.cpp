@@ -70,13 +70,13 @@ int testCase()
     float minBounds[4] = { -100, -100, -32, -5};
     float maxBounds[4] = { 100,   100, 32, 5};
 
-    for (int i = 0; i < dimensions; i++)
+    for (int i = 0; i < sizeof(dimensions)/sizeof(dimensions[0]); i++)
     {
-        for (int j = 0; j < popSizes; j++)
+        for (int j = 0; j < sizeof(popSizes)/sizeof(popSizes[0]); j++)
         {
-            for (int k = 0; k < crossRates; k++)
+            for (int k = 0; k < sizeof(crossRates)/sizeof(crossRates[0]); k++)
             {
-                for (int l = 0; l < costFuncs; l++)
+                for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
                 {
                     runTest(popSizes[j], dimensions[i], costFuncs[k],
                             minBounds[k], maxBounds[k],
