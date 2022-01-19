@@ -97,8 +97,8 @@ int testCase()
                 {
                     std::cout << "Func: " << costFuncs[l] << std::endl;
                     auto t1 = high_resolution_clock::now();
-                    bestCost = runTest(popSizes[j], dimensions[i], costFuncs[k],
-                            minBounds[k], maxBounds[k],
+                    bestCost = runTest(popSizes[j], dimensions[i], costFuncs[l],
+                            minBounds[l], maxBounds[l],
                             crossRates[k]
                             );
                     auto t2 = high_resolution_clock::now();
