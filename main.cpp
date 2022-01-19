@@ -29,7 +29,7 @@
 #include <vector>
 #include <cuda_runtime.h>
 
-int runTest(int popSize, int dim, int costFun, float *minBound, float *maxBound, float cr)
+int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
     float arr[3] = {2.5, 2.6, 2.7};
 
