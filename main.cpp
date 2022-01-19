@@ -99,8 +99,8 @@ int testCase()
     int popSizes[4] = { 50, 100, 500, 1000 };
     float crossRates[1] = { 0.3 };
     int costFuncs[4] = { SPHERE, ROSENBROCK, GRIEWANK, RASTRIGIN };
-    float minBounds[4] = { -100, -100, -32, -5};
-    float maxBounds[4] = { 100,   100, 32, 5};
+    float minBounds[4] = { -100, -100, -600, -5};
+    float maxBounds[4] = { 100,   100, 600, 5};
     float costValues[25] = {0};
     float costTimes[25] = {0};
 
