@@ -56,7 +56,7 @@ int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, f
     // get the result from the minimizer
     float result = minimizer.fmin(d_x);
     std::cout << x.costFun << std::endl;
-    std::cout << "Result = " << result[0] << std::endl;
+    std::cout << "Result = " << result << std::endl;
     std::cout << "Finished main function." << std::endl;
     return 1;
 }
