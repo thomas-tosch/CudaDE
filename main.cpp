@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
     return 1;
 }
 
-int runTest(int popSize, int dim, int costFun, float *minBounds, float *maxBounds, float cr)
+int runTest(int popSize, int dim, int costFun, float *minBound, float *maxBound, float cr)
 {
     float arr[3] = {2.5, 2.6, 2.7};
 
@@ -71,8 +71,8 @@ int runTest(int popSize, int dim, int costFun, float *minBounds, float *maxBound
     x.v = popSize;
     x.dim = dim;
     x.costFun = costFun;
-    float minBounds[x.dim] = {minBounds};
-    float maxBounds[x.dim] = {maxBounds};
+    float minBounds[x.dim] = {minBound};
+    float maxBounds[x.dim] = {maxBound};
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
     int maxGen = (10000 * x.dim) / x.v;
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
