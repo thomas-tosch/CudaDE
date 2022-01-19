@@ -60,7 +60,7 @@ int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, f
     for (int i = 0; i < sizeof(result)/sizeof(result[0]); i++) {
          std::cout << result[i] << ", ";
     }
-    std::endl;
+    std::cout << std::endl;
     std::cout << "Finished main function." << std::endl;
     return 1;
 }
