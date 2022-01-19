@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
     return 1;
 }
 
-int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
+int runTest(int popSize, int dim, int costFun, float *minBounds, float *maxBounds, float cr)
 {
     float arr[3] = {2.5, 2.6, 2.7};
 
