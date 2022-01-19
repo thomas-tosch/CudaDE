@@ -76,9 +76,9 @@ int testCase()
     using std::chrono::duration_cast;
     using std::chrono::duration;
     using std::chrono::milliseconds;
-    int dimensions[6] = { 10, 30, 50, 100, 210, 410 };
-    int popSizes[6] = { 32, 64, 128, 256, 512, 1024 };
-    float crossRates[3] = { 0.3, 0.8, 0.9 };
+    int dimensions[3] = { 10, 50, 100};
+    int popSizes[4] = { 50, 100, 500, 1000 };
+    float crossRates[1] = { 0.3 };
     int costFuncs[4] = { SPHERE, ROSENBROCK, ACKLEY, RASTRIGIN };
     float minBounds[4] = { -100, -100, -32, -5};
     float maxBounds[4] = { 100,   100, 32, 5};
