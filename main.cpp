@@ -30,8 +30,7 @@
 #include <vector>
 #include <cuda_runtime.h>
 
-int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr,
-    float F1,float F2,float F3,float F4)
+int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
     float arr[3] = {2.5, 2.6, 2.7};
@@ -52,7 +51,7 @@ int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, f
     int maxGen = (10000 * x.dim) / x.v;
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
     DifferentialEvolution minimizer(x.v,maxGen, x.dim,
-                                    cr, 0.5, F1, F2, F3, F4, minBounds, maxBounds);
+                                    cr, 0.5, minBounds, maxBounds);
     gpuErrorCheck(cudaMemcpy(d_x, (void *)&x, sizeof(struct data), cudaMemcpyHostToDevice));
     // get the result from the minimizer
     std::vector<float> result = minimizer.fmin(d_x);
@@ -64,11 +63,6 @@ int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, f
 
 int testCase()
 {
-    float F1 = 0.25;
-    float F2 = 0.25;
-    float F3 = 0.2;
-    float F4 = 0.2;
-
     int dimensions[6] = { 10, 30, 50, 100, 210, 410 };
     int popSizes[6] = { 32, 64, 128, 256, 512, 1024 };
     float crossRates[3] = { 0.3, 0.8, 0.9 };
@@ -86,7 +80,7 @@ int testCase()
                 {
                     runTest(popSizes[j], dimensions[i], costFuncs[k],
                             minBounds[k], maxBounds[k],
-                            crossRates[k], F1, F2, F3, F4
+                            crossRates[k]
                             );
                 }
             }
@@ -125,7 +119,7 @@ int main(int argc, char *argv[])
         maxBound[0] = std::stoi(argv[5]);
     }
     auto t1 = high_resolution_clock::now();
-    runTest(popSize, dim, costFun, minBound[0], maxBound[0], 0.8, F1, F2, F3, F4);
+    runTest(popSize, dim, costFun, minBound[0], maxBound[0], 0.8);
     auto t2 = high_resolution_clock::now();
     duration<double, std::milli> ms_double = t2 - t1;
     std::cout << ms_double.count() << "ms\n";

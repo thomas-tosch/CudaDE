@@ -399,10 +399,6 @@ __global__ void evolutionKernel(float *d_target,
                                 int popSize,
                                 int CR, // Must be given as value between [0,999]
                                 float F,
-                                float F1,
-                                float F2,
-                                float F3,
-                                float F4,
                                 void *costArgs)
 {
     int idx = (blockIdx.x * blockDim.x) + threadIdx.x;
@@ -425,6 +421,11 @@ __global__ void evolutionKernel(float *d_target,
     do { d = curand(state) % popSize; } while (d == idx || d == a || d == b || d == c);
     do { e = curand(state) % popSize; } while (e == idx || e == a || e == b || e == c || e == d);
     j = curand(state) % dim;
+
+    float F1 = 0.25;
+    float F2 = 0.25;
+    float F3 = 0.2;
+    float F4 = 0.2;
 
     float best = FLT_MAX;
     int bestIdx = 0;
@@ -500,10 +501,6 @@ void differentialEvolution(float *d_target,
                            int maxGenerations,
                            int CR, // Must be given as value between [0,999]
                            float F,
-                           float F1,
-                           float F2,
-                           float F3,
-                           float F4,
                            void *costArgs,
                            float *h_output)
 {
@@ -541,7 +538,7 @@ void differentialEvolution(float *d_target,
 
         // start kernel for this generation
         evolutionKernel<<<1, power32>>>(d_target, d_trial, d_cost, d_target2, d_min, d_max,
-                                        (curandState_t *)randStates, dim, popSize, CR, F,F1,F2,F3,F4 costArgs);
+                                        (curandState_t *)randStates, dim, popSize, CR, F, costArgs);
         gpuErrorCheck(cudaPeekAtLastError());
 
         // swap buffers, places newest data into d_target.
