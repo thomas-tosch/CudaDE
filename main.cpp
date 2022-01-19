@@ -122,7 +122,7 @@ int testCase()
                         );
                         auto t2 = high_resolution_clock::now();
                         duration<double, std::milli> ms_double = t2 - t1;
-                        costTimes[m] = ms_double.count()
+                        costTimes[m] = ms_double.count();
                     }
                     //std::cout << "Pop: " << popSizes[j] << std::endl;
                     std::cout << "F(" << costFuncs[l] << ");" << popSizes[j] << ";";
