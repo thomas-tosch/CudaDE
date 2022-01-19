@@ -56,8 +56,8 @@ float runTest(int popSize, int dim, int costFun, float minBound, float maxBound,
     gpuErrorCheck(cudaMemcpy(d_x, (void *)&x, sizeof(struct data), cudaMemcpyHostToDevice));
     // get the result from the minimizer
     float* result = minimizer.fmin(d_x);
-    std::cout << x.costFun << std::endl;
-    std::cout << "Result = ";
+    //std::cout << x.costFun << std::endl;
+    //std::cout << "Result = ";
     float bestCost = FLT_MAX;
     for (int i = 0; i < popSize; i++) {
         float curCost = result[i];
