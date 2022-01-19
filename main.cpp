@@ -57,10 +57,14 @@ int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, f
     float* result = minimizer.fmin(d_x);
     std::cout << x.costFun << std::endl;
     std::cout << "Result = ";
+    float bestCost = FLT_MAX;
     for (int i = 0; i < popSize; i++) {
-         std::cout << result[i] << ", ";
+        float curCost = result[i];
+        if (curCost < bestCost) {
+            bestCost = curCost;
+        }
     }
-    std::cout << std::endl;
+    std::cout << bestCost << std::endl;
     std::cout << "Finished main function." << std::endl;
     return 1;
 }
