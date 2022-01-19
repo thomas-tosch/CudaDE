@@ -80,6 +80,6 @@ int main(int argc, char *argv[])
     if (argc > 5) {
         maxBound[0] = std::stoi(argv[5]);
     }
-    runTest(popSize, dim, costFun, minBound, maxBound, 0.8);
+    runTest(popSize, dim, costFun, minBound[0], maxBound[0], 0.8);
     return 1;
 }
