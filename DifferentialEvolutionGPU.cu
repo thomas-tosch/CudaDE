@@ -276,6 +276,7 @@ __device__ float weierstrass(const float *vec, const void *args)
         }
         return sum;
     };
+    printf("%f", w(0, 0.5, 3, 20))
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
         sum += w(vec[i], 0.5, 3, 20) - a->dim * w(0, 0.5, 3, 20);
