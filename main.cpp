@@ -104,7 +104,7 @@ int testCase()
                     auto t2 = high_resolution_clock::now();
                     duration<double, std::milli> ms_double = t2 - t1;
                     std::cout << bestCost << ";";
-                    std::cout << ms_double.count() << std:endl;
+                    std::cout << ms_double.count() << std::endl;
                 }
             }
         }
