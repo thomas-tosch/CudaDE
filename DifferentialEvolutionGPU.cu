@@ -137,7 +137,8 @@ __device__ float sphere(const float *vec, const void *args)
     for (int i = 0; i < a->dim; i++) {
         sum += vec[i] * vec[i];
     }
-    return sum + (-450);
+    // -450
+    return sum;
 }
 
 __device__ float rosenbrock(const float *vec, const void *args)
@@ -148,7 +149,8 @@ __device__ float rosenbrock(const float *vec, const void *args)
     for (int i = 0; i < a->dim - 1; i++) {
         sum += (100 * pow(vec[i+1] - pow(vec[i], 2), 2)) + pow(1 - vec[i], 2);
     }
-    return sum + 390;
+    // +390
+    return sum;
 }
 
 __device__ float schwefel(const float *vec, const void *args)
@@ -207,7 +209,8 @@ __device__ float griewank(const float *vec, const void *args)
     for (int i = 1; i < a->dim + 1; i++) {
         mult *= cos(vec[i - 1] / sqrtf((float)i)) + 1;
     }
-    return (sum - mult) - 180;
+    // -180
+    return (sum - mult);
 }
 
 __device__ float rastrigin(const float *vec, const void *args)
