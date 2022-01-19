@@ -125,5 +125,5 @@ std::vector<float> DifferentialEvolution::fmin(void *args)
                           d_max, h_cost, d_randStates, dim, popSize, numGenerations, CR, F, args,
                           result.data());
 
-    return result;
+    return h_cost;
 }
