@@ -87,20 +87,20 @@ int testCase()
     for (int i = 0; i < sizeof(dimensions)/sizeof(dimensions[0]); i++)
     {
         std::cout << "Dim: " << dimensions[i] << std::endl;
-        for (int j = 0; j < sizeof(popSizes)/sizeof(popSizes[0]); j++)
+        std::cout << "Func;Cost;Time;";
+        for (int k = 0; k < sizeof(crossRates)/sizeof(crossRates[0]); k++)
         {
-            std::cout << "Pop: " << popSizes[j] << std::endl;
-            for (int k = 0; k < sizeof(crossRates)/sizeof(crossRates[0]); k++)
+            for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
             {
-                std::cout << "CR: " << crossRates[k] << std::endl;
-                for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
+                for (int j = 0; j < sizeof(popSizes)/sizeof(popSizes[0]); j++)
                 {
+                    //std::cout << "Pop: " << popSizes[j] << std::endl;
                     std::cout << "F(" << costFuncs[l] << ");";
                     auto t1 = high_resolution_clock::now();
                     bestCost = runTest(popSizes[j], dimensions[i], costFuncs[l],
-                            minBounds[l], maxBounds[l],
-                            crossRates[k]
-                            );
+                    minBounds[l], maxBounds[l],
+                    crossRates[k]
+                    );
                     auto t2 = high_resolution_clock::now();
                     duration<double, std::milli> ms_double = t2 - t1;
                     std::cout << bestCost << ";";
