@@ -45,13 +45,13 @@ int main(int argc, char *argv[])
     if (argc > 3) {
         costFun = std::stoi(argv[3]);
     }
-    float minBounds[dim] = {-100};
-    float maxBounds[dim] = {100};
+    float minBound[dim] = {-100};
+    float maxBound[dim] = {100};
     if (argc > 4) {
-        minBounds[0] = std::stoi(argv[4]);
+        minBound[0] = std::stoi(argv[4]);
     }
     if (argc > 5) {
-        maxBounds[0] = std::stoi(argv[5]);
+        maxBound[0] = std::stoi(argv[5]);
     }
     runTest(popSize, dim, costFun, minBound, maxBound, 0.8);
     return 1;
