@@ -87,7 +87,7 @@ int testCase()
     for (int i = 0; i < sizeof(dimensions)/sizeof(dimensions[0]); i++)
     {
         std::cout << "Dim: " << dimensions[i] << std::endl;
-        std::cout << "Func;Cost;Time;";
+        std::cout << "Func;PopSize;Cost;Time;" << std::endl;
         for (int k = 0; k < sizeof(crossRates)/sizeof(crossRates[0]); k++)
         {
             for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
@@ -95,7 +95,7 @@ int testCase()
                 for (int j = 0; j < sizeof(popSizes)/sizeof(popSizes[0]); j++)
                 {
                     //std::cout << "Pop: " << popSizes[j] << std::endl;
-                    std::cout << "F(" << costFuncs[l] << ");";
+                    std::cout << "F(" << costFuncs[l] << ");" << popSizes[j] << ";";
                     auto t1 = high_resolution_clock::now();
                     bestCost = runTest(popSizes[j], dimensions[i], costFuncs[l],
                     minBounds[l], maxBounds[l],
