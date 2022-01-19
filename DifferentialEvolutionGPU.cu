@@ -266,18 +266,16 @@ __device__ float whitely(const float *vec, const void *args)
     return total;
 }
 
-__device__ auto w(float x, float a, float b, float m)
-{
-    float sum = 0;
-    for (int k = 0; k <= m ; k++) {
-        sum += pow(a, k) * cos(2*M_PI*pow(b,k)*(x+0.5));
-    }
-    return sum;
-}
-
 __device__ float weierstrass(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
+    auto w = [](float x, float a, float b, float m) {
+        float sum = 0;
+        for (int k = 0; k <= m ; k++) {
+            sum += pow(a, k) * cos(2*M_PI*pow(b,k)*(x+0.5));
+        }
+        return sum;
+    };
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
         sum += w(vec[i], 0.5, 3, 20) - a->dim * w(0, 0.5, 3, 20);
@@ -321,6 +319,8 @@ __device__ float costFunc(const float *vec, const void *args) {
     { return salomon(vec, args); }
     else if (a->costFun == WHITELY)
     { return whitely(vec, args); }
+    else if (a->costFun == WEIERSTRASS)
+    { return weierstrass(vec, args); }
     return 0;
 }
 
