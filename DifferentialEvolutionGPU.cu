@@ -254,9 +254,9 @@ __device__ float whitely(const float *vec, const void *args)
     const struct data *a = (struct data *)args;
     float sum = 0;
     float total = 0;
-    for (int j = 0; j < a->dim; i++) {
+    for (int j = 0; j < a->dim; j++) {
         sum = 0;
-        for (int i = 0; i <= j; j++) {
+        for (int i = 0; i <= j; i++) {
             y = 100 * pow(vec[j] - pow(vec[i], 2), 2) + pow(1 - vec[î], 2);
             sum += ((y / 4000) - cos(y) + 1);
         }
