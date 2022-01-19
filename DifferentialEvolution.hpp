@@ -125,7 +125,7 @@ public:
     //      This MUST point to device memory or NULL.
     //
     // @return the best set of parameters
-    float fmin(void *args);
+    std::vector<float> fmin(void *args);
 
 };
 

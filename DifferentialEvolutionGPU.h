@@ -116,7 +116,7 @@ void differentialEvolution(float *d_target,
                            int CR, // Must be given as value between [0,999]
                            float F,
                            void *costArgs,
-                           float h_output);
+                           float *h_output);
 
 // createRandNumGen
 // Inits the array of random number generators required by differentialEvolution
