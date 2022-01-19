@@ -117,7 +117,7 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
 //      This MUST point to device memory or NULL.
 //
 // @return the best set of parameters
-std::vector<float> DifferentialEvolution::fmin(void *args)
+float DifferentialEvolution::fmin(void *args)
 {
     //std::vector<float> result(dim);
     float result = 0;
