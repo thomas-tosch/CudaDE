@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <chrono>
 #include <cfloat>
-#include <math>
+#include <math.h>
 
 #include "DifferentialEvolution.hpp"
 #include <iostream>
