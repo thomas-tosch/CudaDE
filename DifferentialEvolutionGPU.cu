@@ -254,6 +254,7 @@ __device__ float whitely(const float *vec, const void *args)
     const struct data *a = (struct data *)args;
     float sum = 0;
     float total = 0;
+    float y = 0;
     for (int j = 0; j < a->dim; j++) {
         sum = 0;
         for (int i = 0; i <= j; i++) {
