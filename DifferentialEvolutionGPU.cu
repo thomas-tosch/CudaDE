@@ -269,7 +269,7 @@ __device__ float whitely(const float *vec, const void *args)
 __device__ float weierstrass(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
-    float w = [](float x, float a, float b, float m) {
+    auto w = [](float x, float a, float b, float m) {
         float sum = 0;
         for (int k = 0; k <= m ; k++) {
             sum += pow(a, k) * cos(2*M_PI*pow(b,k)*(x+0.5));
