@@ -31,7 +31,7 @@
 #include <vector>
 #include <cuda_runtime.h>
 
-int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
+float runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
     float arr[3] = {2.5, 2.6, 2.7};
@@ -67,17 +67,22 @@ int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, f
     }
     std::cout << bestCost << std::endl;
     std::cout << "Finished main function." << std::endl;
-    return 1;
+    return bestCost;
 }
 
 int testCase()
 {
+    using std::chrono::high_resolution_clock;
+    using std::chrono::duration_cast;
+    using std::chrono::duration;
+    using std::chrono::milliseconds;
     int dimensions[6] = { 10, 30, 50, 100, 210, 410 };
     int popSizes[6] = { 32, 64, 128, 256, 512, 1024 };
     float crossRates[3] = { 0.3, 0.8, 0.9 };
     int costFuncs[4] = { SPHERE, ROSENBROCK, ACKLEY, RASTRIGIN };
     float minBounds[4] = { -100, -100, -32, -5};
     float maxBounds[4] = { 100,   100, 32, 5};
+    float bestCost = 0;
 
     for (int i = 0; i < sizeof(dimensions)/sizeof(dimensions[0]); i++)
     {
@@ -87,10 +92,15 @@ int testCase()
             {
                 for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
                 {
-                    runTest(popSizes[j], dimensions[i], costFuncs[k],
+                    auto t1 = high_resolution_clock::now();
+                    bestCost = runTest(popSizes[j], dimensions[i], costFuncs[k],
                             minBounds[k], maxBounds[k],
                             crossRates[k]
                             );
+                    auto t2 = high_resolution_clock::now();
+                    duration<double, std::milli> ms_double = t2 - t1;
+                    std::cout << "Cost: " << bestCost << " Time: ";
+                    std::cout << ms_double.count() << "ms\n";
                 }
             }
         }
