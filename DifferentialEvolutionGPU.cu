@@ -288,7 +288,7 @@ __device__ float weierstrass(const float *vec, const void *args)
 __device__ float generalizedPenalized(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
-    return M_PI / a->dim * (10 * pow(sin(M_PI * vec[0]), 2)) +
+    //return M_PI / a->dim * (10 * pow(sin(M_PI * vec[0]), 2)) +
 }
 
 
