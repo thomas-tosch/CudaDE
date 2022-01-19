@@ -95,7 +95,7 @@ int testCase()
                 std::cout << "CR: " << crossRates[k] << std::endl;
                 for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
                 {
-                    std::cout << "Func: " << costFuncs[l] << std::endl;
+                    std::cout << "F(" << costFuncs[l] << ");";
                     auto t1 = high_resolution_clock::now();
                     bestCost = runTest(popSizes[j], dimensions[i], costFuncs[l],
                             minBounds[l], maxBounds[l],
@@ -103,8 +103,8 @@ int testCase()
                             );
                     auto t2 = high_resolution_clock::now();
                     duration<double, std::milli> ms_double = t2 - t1;
-                    std::cout << "Cost: " << bestCost << " Time: ";
-                    std::cout << ms_double.count() << "ms\n";
+                    std::cout << bestCost << ";";
+                    std::cout << ms_double.count() << "";
                 }
             }
         }
