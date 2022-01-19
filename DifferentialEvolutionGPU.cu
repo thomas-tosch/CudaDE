@@ -502,7 +502,7 @@ void differentialEvolution(float *d_target,
                            int CR, // Must be given as value between [0,999]
                            float F,
                            void *costArgs,
-                           float *h_output)
+                           float h_output)
 {
     cudaError_t ret;
     int power32 = ceil(popSize / 32.0) * 32;
@@ -573,7 +573,7 @@ void differentialEvolution(float *d_target,
 
     // output best minimization
     //printCudaVector(d_target+(bestIdx*dim), dim);
-    ret = cudaMemcpy(h_output, bestCost, sizeof(float)*dim, cudaMemcpyDeviceToHost);
+    ret = cudaMemcpy(h_output, bestCost, sizeof(float), cudaMemcpyDeviceToHost);
     gpuErrorCheck(ret);
 }
 
