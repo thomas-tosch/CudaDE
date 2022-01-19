@@ -65,8 +65,8 @@ float runTest(int popSize, int dim, int costFun, float minBound, float maxBound,
             bestCost = curCost;
         }
     }
-    std::cout << bestCost << std::endl;
-    std::cout << "Finished main function." << std::endl;
+    //std::cout << bestCost << std::endl;
+    //std::cout << "Finished main function." << std::endl;
     return bestCost;
 }
 
@@ -86,12 +86,16 @@ int testCase()
 
     for (int i = 0; i < sizeof(dimensions)/sizeof(dimensions[0]); i++)
     {
+        std::cout << "Dim: " << dimensions[i] << std::endl;
         for (int j = 0; j < sizeof(popSizes)/sizeof(popSizes[0]); j++)
         {
+            std::cout << "Pop: " << popSizes[i] << std::endl;
             for (int k = 0; k < sizeof(crossRates)/sizeof(crossRates[0]); k++)
             {
+                std::cout << "CR: " << crossRates[i] << std::endl;
                 for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
                 {
+                    std::cout << "Func: " << costFuncs[i] << std::endl;
                     auto t1 = high_resolution_clock::now();
                     bestCost = runTest(popSizes[j], dimensions[i], costFuncs[k],
                             minBounds[k], maxBounds[k],
