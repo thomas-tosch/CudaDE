@@ -433,7 +433,7 @@ __global__ void evolutionKernel(float *d_target,
     float best = FLT_MAX;
     int bestIdx = 0;
     for (int i = 0; i < popSize; i++) {
-        if (d_cost[i] < best) {
+        if (fabs(d_cost[i]) < best) {
             best = d_cost[i];
             bestIdx = i;
         }
@@ -560,7 +560,7 @@ void differentialEvolution(float *d_target,
     int bestIdx = -1;
     float bestCost = FLT_MAX;
     for (int i = 0; i < popSize; i++) {
-        float curCost = h_cost[i];
+        float curCost = fabs(h_cost[i]);
         //std::cout << curCost << ", ";
         if (curCost < bestCost) {
             bestCost = curCost;
