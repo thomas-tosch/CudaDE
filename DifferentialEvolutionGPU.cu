@@ -573,7 +573,7 @@ void differentialEvolution(float *d_target,
 
     // output best minimization
     //printCudaVector(d_target+(bestIdx*dim), dim);
-    ret = cudaMemcpy(h_output, bestCost, sizeof(float)*dim, cudaMemcpyDeviceToHost);
+    ret = cudaMemcpy(h_output, d_target+(bestCost*dim), sizeof(float)*dim, cudaMemcpyDeviceToHost);
     gpuErrorCheck(ret);
 }
 
