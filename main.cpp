@@ -108,6 +108,7 @@ int testCase()
                 }
             }
         }
+        std:cout << std::endl;
     }
 }
 
