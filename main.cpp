@@ -70,6 +70,25 @@ float runTest(int popSize, int dim, int costFun, float minBound, float maxBound,
     return bestCost;
 }
 
+float meanValue(float *values)
+{
+    float sum = 0;
+    for (int i = 0; i < 25; i ++) {
+        sum += values[i];
+    }
+    return sum / 25;
+}
+
+float standardDeviation(float *values)
+{
+    float sum = 0;
+    float mean = meanValue(values);
+    for (int i = 0; i < 25; i++) {
+        sum += pow(std::abs(values[i] - mean), 2);
+    }
+    return sqrt(sum / 25);
+}
+
 int testCase()
 {
     using std::chrono::high_resolution_clock;
@@ -79,10 +98,11 @@ int testCase()
     int dimensions[3] = { 10, 50, 100};
     int popSizes[4] = { 50, 100, 500, 1000 };
     float crossRates[1] = { 0.3 };
-    int costFuncs[4] = { SPHERE, ROSENBROCK, ACKLEY, RASTRIGIN };
+    int costFuncs[4] = { SPHERE, ROSENBROCK, GRIEWANK, RASTRIGIN };
     float minBounds[4] = { -100, -100, -32, -5};
     float maxBounds[4] = { 100,   100, 32, 5};
-    float bestCost = 0;
+    float costValues[25] = {0};
+    float costTimes[25] = {0};
 
     for (int i = 0; i < sizeof(dimensions)/sizeof(dimensions[0]); i++)
     {
@@ -94,17 +114,20 @@ int testCase()
             {
                 for (int j = 0; j < sizeof(popSizes)/sizeof(popSizes[0]); j++)
                 {
+                    for (int m = 0; m < 25; m++) {
+                        auto t1 = high_resolution_clock::now();
+                        costValues[m] = runTest(popSizes[j], dimensions[i],
+                                                costFuncs[l], minBounds[l],
+                                                maxBounds[l],crossRates[k]
+                        );
+                        auto t2 = high_resolution_clock::now();
+                        duration<double, std::milli> ms_double = t2 - t1;
+                        costTimes[m] = ms_double.count()
+                    }
                     //std::cout << "Pop: " << popSizes[j] << std::endl;
                     std::cout << "F(" << costFuncs[l] << ");" << popSizes[j] << ";";
-                    auto t1 = high_resolution_clock::now();
-                    bestCost = runTest(popSizes[j], dimensions[i], costFuncs[l],
-                    minBounds[l], maxBounds[l],
-                    crossRates[k]
-                    );
-                    auto t2 = high_resolution_clock::now();
-                    duration<double, std::milli> ms_double = t2 - t1;
-                    std::cout << bestCost << ";";
-                    std::cout << ms_double.count() << std::endl;
+                    std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << ");";
+                    std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << ");" << std::endl;
                 }
             }
         }
