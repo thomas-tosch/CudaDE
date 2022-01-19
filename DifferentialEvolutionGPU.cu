@@ -169,7 +169,7 @@ __device__ float schwefel(const float *vec, const void *args)
 __device__ float quatric(const float *vec, const void *args)
 {
     curandState_t state;
-    curand_init(1, /* the seed controls the sequence of random values that are produced */
+    curand_init(clock(), /* the seed controls the sequence of random values that are produced */
                 0, /* the sequence number is only important with multiple cores */
                 0, /* the offset is how much extra we advance in the sequence for each call, can be 0 */
                 &state);
@@ -284,6 +284,13 @@ __device__ float weierstrass(const float *vec, const void *args)
     }
     return sum;
 }
+
+__device__ float generalizedPenalized(const float *vec, const void *args)
+{
+    const struct data *a = (struct data *)args;
+    return M_PI / a->dim * (10 * pow(sin(M_PI * vec[0]), 2)) +
+}
+
 
 // costFunc
 // This is a selector of the functions.

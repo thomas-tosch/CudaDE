@@ -33,7 +33,32 @@
 
 int main(int argc, char *argv[])
 {
-    // a random array or data that gets passed to the cost function.
+    int dim = 3;
+    int popSize = 3;
+    int costFun = 3;
+    if (argc > 1) {
+        popSize = std::stoi(argv[1]);
+    }
+    if (argc > 2) {
+        dim = std::stoi(argv[2]);
+    }
+    if (argc > 3) {
+        costFun = std::stoi(argv[3]);
+    }
+    float minBounds[dim] = {-100};
+    float maxBounds[dim] = {100};
+    if (argc > 4) {
+        minBounds[0] = std::stoi(argv[4]);
+    }
+    if (argc > 5) {
+        maxBounds[0] = std::stoi(argv[5]);
+    }
+    runTest(popSize, dim, costFun, minBound, maxBound, 0.8);
+    return 1;
+}
+
+int runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
+{
     float arr[3] = {2.5, 2.6, 2.7};
 
     // data that is created in host, then copied to a device version for use with the cost function.
@@ -43,42 +68,20 @@ int main(int argc, char *argv[])
     unsigned long size = sizeof(struct data);
     gpuErrorCheck(cudaMalloc((void **)&d_x, size));
 
-    x.v = 3;
-    x.dim = 2;
-    x.costFun = 1;
-    if (argc > 1) {
-        x.v = std::stoi(argv[1]);
-    }
-    if (argc > 2) {
-        x.dim = std::stoi(argv[2]);
-    }
-    if (argc > 3) {
-        x.costFun = std::stoi(argv[3]);
-    }
-    float minBounds[x.dim] = {-100};
-    float maxBounds[x.dim] = {100};
-    if (argc > 4) {
-        minBounds[0] = std::stoi(argv[4]);
-    }
-    if (argc > 5) {
-        maxBounds[0] = std::stoi(argv[5]);
-    }
-
+    x.v = popSize;
+    x.dim = dim;
+    x.costFun = costFun;
+    float minBounds[x.dim] = {minBounds};
+    float maxBounds[x.dim] = {maxBounds};
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
-
-    // create the min and max bounds for the search space.
-
     int maxGen = (10000 * x.dim) / x.v;
-
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
-    DifferentialEvolution minimizer(x.v,maxGen, x.dim, 0.8, 0.5, minBounds, maxBounds);
-
+    DifferentialEvolution minimizer(x.v,maxGen, x.dim,
+                                    cr, 0.5, minBounds, maxBounds);
     gpuErrorCheck(cudaMemcpy(d_x, (void *)&x, sizeof(struct data), cudaMemcpyHostToDevice));
-
     // get the result from the minimizer
     std::vector<float> result = minimizer.fmin(d_x);
     std::cout << x.costFun << std::endl;
     std::cout << "Result = " << result[0] << ", " << result[1] << std::endl;
     std::cout << "Finished main function." << std::endl;
-    return 1;
 }
