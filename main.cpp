@@ -29,34 +29,6 @@
 #include <vector>
 #include <cuda_runtime.h>
 
-
-
-int main(int argc, char *argv[])
-{
-    int dim = 3;
-    int popSize = 3;
-    int costFun = 3;
-    if (argc > 1) {
-        popSize = std::stoi(argv[1]);
-    }
-    if (argc > 2) {
-        dim = std::stoi(argv[2]);
-    }
-    if (argc > 3) {
-        costFun = std::stoi(argv[3]);
-    }
-    float minBound[dim] = {-100};
-    float maxBound[dim] = {100};
-    if (argc > 4) {
-        minBound[0] = std::stoi(argv[4]);
-    }
-    if (argc > 5) {
-        maxBound[0] = std::stoi(argv[5]);
-    }
-    runTest(popSize, dim, costFun, minBound, maxBound, 0.8);
-    return 1;
-}
-
 int runTest(int popSize, int dim, int costFun, float *minBound, float *maxBound, float cr)
 {
     float arr[3] = {2.5, 2.6, 2.7};
@@ -84,4 +56,30 @@ int runTest(int popSize, int dim, int costFun, float *minBound, float *maxBound,
     std::cout << x.costFun << std::endl;
     std::cout << "Result = " << result[0] << ", " << result[1] << std::endl;
     std::cout << "Finished main function." << std::endl;
+}
+
+int main(int argc, char *argv[])
+{
+    int dim = 3;
+    int popSize = 3;
+    int costFun = 3;
+    if (argc > 1) {
+        popSize = std::stoi(argv[1]);
+    }
+    if (argc > 2) {
+        dim = std::stoi(argv[2]);
+    }
+    if (argc > 3) {
+        costFun = std::stoi(argv[3]);
+    }
+    float minBound[dim] = {-100};
+    float maxBound[dim] = {100};
+    if (argc > 4) {
+        minBound[0] = std::stoi(argv[4]);
+    }
+    if (argc > 5) {
+        maxBound[0] = std::stoi(argv[5]);
+    }
+    runTest(popSize, dim, costFun, minBound, maxBound, 0.8);
+    return 1;
 }
