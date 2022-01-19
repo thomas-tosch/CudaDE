@@ -258,7 +258,7 @@ __device__ float whitely(const float *vec, const void *args)
     for (int j = 0; j < a->dim; j++) {
         sum = 0;
         for (int i = 0; i <= j; i++) {
-            y = 100 * pow(vec[j] - pow(vec[i], 2), 2) + pow(1 - vec[î], 2);
+            y = 100 * pow(vec[j] - pow(vec[i], 2), 2) + pow(1 - vec[i], 2);
             sum += ((y / 4000) - cos(y) + 1);
         }
         total += sum;
