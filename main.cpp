@@ -89,13 +89,13 @@ int testCase()
         std::cout << "Dim: " << dimensions[i] << std::endl;
         for (int j = 0; j < sizeof(popSizes)/sizeof(popSizes[0]); j++)
         {
-            std::cout << "Pop: " << popSizes[i] << std::endl;
+            std::cout << "Pop: " << popSizes[j] << std::endl;
             for (int k = 0; k < sizeof(crossRates)/sizeof(crossRates[0]); k++)
             {
-                std::cout << "CR: " << crossRates[i] << std::endl;
+                std::cout << "CR: " << crossRates[k] << std::endl;
                 for (int l = 0; l < sizeof(costFuncs)/sizeof(costFuncs[0]); l++)
                 {
-                    std::cout << "Func: " << costFuncs[i] << std::endl;
+                    std::cout << "Func: " << costFuncs[l] << std::endl;
                     auto t1 = high_resolution_clock::now();
                     bestCost = runTest(popSizes[j], dimensions[i], costFuncs[k],
                             minBounds[k], maxBounds[k],
