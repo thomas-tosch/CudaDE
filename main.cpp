@@ -109,6 +109,9 @@ int testCase()
 
 int main(int argc, char *argv[])
 {
+    if (argc == 1) {
+        return testCase();
+    }
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
     using std::chrono::duration;
