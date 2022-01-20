@@ -210,7 +210,7 @@ __device__ float griewank(const float *vec, const void *args)
         mult *= cos(vec[i - 1] / sqrtf((float)i)) + 1;
     }
     // -180
-    return (sum - mult);
+    return (sum - mult) - 180;
 }
 
 __device__ float rastrigin(const float *vec, const void *args)
