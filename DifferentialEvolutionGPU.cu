@@ -207,10 +207,10 @@ __device__ float griewank(const float *vec, const void *args)
     }
     float mult = 1;
     for (int i = 1; i < a->dim + 1; i++) {
-        mult *= cos(vec[i - 1] / sqrtf((float)i)) + 1;
+        mult *= cos(vec[i - 1] / sqrt(i));
     }
     // -180
-    return (sum - mult) - 180;
+    return (sum - mult + 1) - 180;
 }
 
 __device__ float rastrigin(const float *vec, const void *args)
