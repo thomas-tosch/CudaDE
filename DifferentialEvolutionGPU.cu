@@ -144,7 +144,6 @@ __device__ float sphere(const float *vec, const void *args)
 __device__ float rosenbrock(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
-    float offset = 390;
 
     float sum = 0;
     for (int i = 0; i < a->dim - 1; i++) {
