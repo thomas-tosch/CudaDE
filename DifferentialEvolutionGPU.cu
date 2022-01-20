@@ -448,7 +448,7 @@ __global__ void evolutionKernel(float *d_target,
                                    + (F4 * (d_target[(d*dim)+j] - d_target[(e*dim)+j]));
             if(d_trial[(idx*dim)+j] < d_min[0] || d_trial[(idx*dim)+j] > d_max[0] ){
                 //printf("out of bounds\n");
-                d_trial[(idx*dim)+j] = d_target[(idx*dim) + j];
+                d_trial[(idx*dim)+j] = (curand_uniform(state) * (d_max[0] - d_min[0])) + d_min[0];
             }
         } else {
             d_trial[(idx*dim)+j] = d_target[(idx*dim)+j];
