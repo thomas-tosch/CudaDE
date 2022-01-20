@@ -135,7 +135,7 @@ __device__ float sphere(const float *vec, const void *args)
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
-        sum += vec[i] * vec[i];
+        sum += (vec[i] * vec[i]);
     }
     // -450
     return sum - 450;
@@ -203,11 +203,11 @@ __device__ float griewank(const float *vec, const void *args)
     const struct data *a = (struct data *)args;
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
-        sum += pow(vec[i], 2) / 4000;
+        sum += (pow(vec[i], 2) / 4000);
     }
     float mult = 1;
     for (int i = 1; i < a->dim + 1; i++) {
-        mult *= cos(vec[i - 1] / sqrtf(i));
+        mult *= (cos(vec[i - 1] / sqrtf(i)));
     }
     // -180
     return (sum - mult + 1) - 180;
@@ -219,7 +219,7 @@ __device__ float rastrigin(const float *vec, const void *args)
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
-        sum += pow(vec[i], 2) - 10 * cos(2 * M_PI * vec[i]);
+        sum += (pow(vec[i], 2) - 10 * cos(2 * M_PI * vec[i]));
     }
     return (10 * a->dim + sum) - 330;
 }
