@@ -442,7 +442,7 @@ __global__ void evolutionKernel(float *d_target,
     ///////////////////// MUTATION ////////////////
     for (int k = 1; k <= dim; k++) {
         //printf("%f", curand(state));
-        if ((curand(state) % 1000) < CR || k==dim) {
+        if (curand(state) < CR || k==dim) {
             // trial vector param comes from vector plus weighted differential
             d_trial[(idx*dim)+j] = d_target[(idx*dim)+j] + (F1 * (d_target[(bestIdx*dim)+j] - d_target[(idx*dim)+j]))
                                    + (F2 * (d_target[(a*dim)+j] - d_target[(idx*dim)+j])) + (F3 * (d_target[(b*dim)+j] - d_target[(c*dim)+j]))

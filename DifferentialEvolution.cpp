@@ -82,7 +82,7 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
     popSize = PopulationSize;
     dim = Dimensions;
     numGenerations = NumGenerations;
-    CR = crossoverConstant*1000;
+    CR = crossoverConstant;
     F = mutantConstant;
     cudaError_t ret;
 
