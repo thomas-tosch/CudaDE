@@ -433,7 +433,7 @@ __global__ void evolutionKernel(float *d_target,
     float best = FLT_MAX;
     int bestIdx = 0;
     for (int i = 0; i < popSize; i++) {
-        if (d_cost[i] < best) {
+        if (absf(d_cost[i]) < best) {
             best = d_cost[i];
             bestIdx = i;
         }
@@ -458,7 +458,7 @@ __global__ void evolutionKernel(float *d_target,
     } // end for loop through parameters
     float score = 0;
     score = costFunc(&d_trial[idx*dim], costArgs);
-    if (score < d_cost[idx]) {
+    if (absf(score) < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
             d_target2[(idx*dim) + j] = d_trial[(idx*dim) + j];
@@ -563,7 +563,7 @@ void differentialEvolution(float *d_target,
     for (int i = 0; i < popSize; i++) {
         float curCost = h_cost[i];
         //std::cout << curCost << ", ";
-        if (curCost < bestCost) {
+        if (absf(curCost) < bestCost) {
             bestCost = curCost;
             bestIdx = i;
         }
