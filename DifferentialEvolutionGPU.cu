@@ -508,7 +508,7 @@ void differentialEvolution(float *d_target,
                            float *h_output)
 {
     cudaError_t ret;
-    int power32 = ceil(popSize / 32.0) * 32;
+    int power32 = ceil(popSize / 16.0) * 16;
     //std::cout << "power32 = " << power32 << std::endl;
 
     //std::cout << "min bounds = ";
