@@ -98,7 +98,7 @@ int testCase()
     using std::chrono::milliseconds;
     int dimensions[3] = { 10, 50, 100};
     int popSizes[4] = { 50, 100, 500, 1000 };
-    float crossRates[1] = { 0.9 };
+    float crossRates[1] = { 0.8 };
     int costFuncs[4] = { SPHERE, ROSENBROCK, GRIEWANK, RASTRIGIN };
     float minBounds[4] = { -5.12, -5, -600, -5.12};
     float maxBounds[4] = { 5.12,   10, 600, 5.12};
