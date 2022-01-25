@@ -116,7 +116,7 @@ DifferentialEvolutionCPU::DifferentialEvolutionCPU(int PopulationSize, int NumGe
 //      This MUST point to device memory or NULL.
 //
 // @return the best set of parameters
-float* DifferentialEvolution::fmin(void *args)
+float* DifferentialEvolutionCPU::fmin(void *args)
 {
     std::vector<float> result(dim);
 
@@ -261,7 +261,6 @@ float quatric(const float *vec, const void *args)
     }
     return sum;
 }
-
 
 float ackley(const float *vec, const void *args)
 {

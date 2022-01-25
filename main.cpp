@@ -27,7 +27,7 @@
 #include <cfloat>
 #include <math.h>
 
-#include "DifferentialEvolution.hpp"
+//#include "DifferentialEvolution.hpp"
 #include "DifferentialEvolutionCPU.hpp"
 #include <iostream>
 #include <vector>
