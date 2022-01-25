@@ -92,7 +92,7 @@ void differentialEvolutionCPU(float *d_target,
                               int maxGenerations,
                               int CR, // Must be given as value between [0,999]
                               float F,
-                              void *costArgs,
+                              dataCPU costArgs,
                               float *h_output);
 
 class DifferentialEvolutionCPU {
