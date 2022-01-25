@@ -410,7 +410,7 @@ void generateRandomVectorAndInit(float *d_x, float *d_min, float *d_max,
                                             float *d_cost, void *costArgs,
                                             int popSize, int dim, unsigned long seed, int idx)
 {
-    int idx = idx - 1;
+    idx--;
     if (idx >= popSize) return;
 
     std::mt19937 rng(seed);
