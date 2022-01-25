@@ -62,8 +62,8 @@
 // std::vector<float> result = minimizer.fmin(d_x);
 //
 
-#ifndef DifferentialEvolution_hpp
-#define DifferentialEvolution_hpp
+#ifndef DifferentialEvolutionCPU_hpp
+#define DifferentialEvolutionCPU_hpp
 
 #include <stdio.h>
 #include <vector>
