@@ -85,7 +85,7 @@ DifferentialEvolutionCPU::DifferentialEvolutionCPU(int PopulationSize, int NumGe
     CR = crossoverConstant;
     F = mutantConstant;
     cudaError_t ret;
-
+/*
     ret = cudaMalloc(&d_target1, sizeof(float) * popSize * dim);
     gpuErrorCheck(ret);
     ret = cudaMalloc(&d_target2, sizeof(float) * popSize * dim);
@@ -106,7 +106,7 @@ DifferentialEvolutionCPU::DifferentialEvolutionCPU(int PopulationSize, int NumGe
     gpuErrorCheck(ret);
     ret = cudaMemcpy(d_max, maxBounds, sizeof(float) * dim, cudaMemcpyHostToDevice);
     gpuErrorCheck(ret);
-
+*/
     h_cost = new float[popSize * dim];
     d_randStates = createRandNumGen(popSize);
 }
@@ -548,7 +548,6 @@ void differentialEvolutionCPU(float *d_target,
 void *createRandNumGen(int size)
 {
     void *x;
-    gpuErrorCheck(cudaMalloc(&x, sizeof(curandState_t)*size));
     return x;
 }
 
