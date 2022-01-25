@@ -29,6 +29,7 @@
 
 #include "DifferentialEvolutionCPU.hpp"
 #include "DifferentialEvolution.hpp"
+#include "DifferentialEvolutionCPU.h"
 #include <iostream>
 #include <vector>
 #include <cuda_runtime.h>
