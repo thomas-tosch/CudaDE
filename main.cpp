@@ -124,7 +124,7 @@ float standardDeviation(float *values)
     }
     return sqrt(sum / 25);
 }
-
+/*
 int testCase()
 {
     using std::chrono::high_resolution_clock;
@@ -170,7 +170,7 @@ int testCase()
         std::cout << std::endl;
     }
 }
-
+*/
 int main(int argc, char *argv[])
 {
     /*if (argc == 1) {
