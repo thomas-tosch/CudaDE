@@ -72,7 +72,7 @@
 // This is a convienent place to put any structs that could be used to send
 // data to the cost. Here is the struct for the example of passing arguements.
 // I recommend you keep it here.
-struct data {
+struct dataCPU {
     float *arr;
     float v;
     int dim;
@@ -142,4 +142,4 @@ void differentialEvolutionCPU(float *d_target,
                               void *costArgs,
                               float *h_output);
 
-#endif /* DifferentialEvolution_hpp */
+#endif /* DifferentialEvolutionCPU_hpp */

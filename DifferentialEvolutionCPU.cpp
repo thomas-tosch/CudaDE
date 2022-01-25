@@ -208,7 +208,7 @@ inline void gpuAssert(cudaError_t code, const char *file, int line)
 
 float sphere(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
@@ -221,7 +221,7 @@ float sphere(const float *vec, const void *args)
 
 float rosenbrock(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
 
     float sum = 0;
     for (int i = 0; i < a->dim - 1; i++) {
@@ -234,7 +234,7 @@ float rosenbrock(const float *vec, const void *args)
 
 float schwefel(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
 
     float sum = 0;
     for (int j = 0; j < a->dim; j++) {
@@ -254,7 +254,7 @@ float quatric(const float *vec, const void *args)
                 0, /* the sequence number is only important with multiple cores */
                 0, /* the offset is how much extra we advance in the sequence for each call, can be 0 */
                 &state);
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
         sum += i * pow(vec[i], 4) + curand(&state) % 1;
@@ -265,7 +265,7 @@ float quatric(const float *vec, const void *args)
 
 float ackley(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
         sum += pow(vec[i], 2);
@@ -279,7 +279,7 @@ float ackley(const float *vec, const void *args)
 
 float griewank(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
         sum += (pow(vec[i], 2) / 4000);
@@ -295,7 +295,7 @@ float griewank(const float *vec, const void *args)
 
 float rastrigin(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
@@ -307,7 +307,7 @@ float rastrigin(const float *vec, const void *args)
 
 float schwefelFunc(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
@@ -318,7 +318,7 @@ float schwefelFunc(const float *vec, const void *args)
 
 float salomon(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
 
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
@@ -335,7 +335,7 @@ float salomon(const float *vec, const void *args)
 
 float whitely(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
     float sum = 0;
     float total = 0;
     float y = 0;
@@ -361,7 +361,7 @@ float w(float x, float a, float b, float m)
 
 float weierstrass(const float *vec, const void *args)
 {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
         sum += w(vec[i], 0.5, 3, 20) - a->dim * w(0, 0.5, 3, 20);
@@ -370,7 +370,7 @@ float weierstrass(const float *vec, const void *args)
 }
 
 float costFunc(const float *vec, const void *args) {
-    const struct data *a = (struct data *)args;
+    const struct dataCPU *a = (struct dataCPU *)args;
     if (a->costFun == SPHERE)
     { return sphere(vec, args); }
     else if (a->costFun == ROSENBROCK)
