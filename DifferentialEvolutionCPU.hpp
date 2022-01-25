@@ -79,7 +79,7 @@ struct data {
     int costFun;
 };
 
-class DifferentialEvolution {
+class DifferentialEvolutionCPU {
 private:
     float *d_target1;
     float *d_target2;
