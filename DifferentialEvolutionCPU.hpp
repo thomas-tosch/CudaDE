@@ -79,7 +79,7 @@ struct dataCPU {
     int dim;
     int costFun;
 };
-
+/*
 void differentialEvolutionCPU(float *d_target,
                               float *d_trial,
                               float *d_cost,
@@ -94,7 +94,7 @@ void differentialEvolutionCPU(float *d_target,
                               float F,
                               void *costArgs,
                               float *h_output);
-
+*/
 class DifferentialEvolutionCPU {
 private:
     float *d_target1;
