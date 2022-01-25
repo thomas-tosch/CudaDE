@@ -67,6 +67,7 @@
 
 #include <stdio.h>
 #include <vector>
+#include "DifferentialEvolutionGPU.h"
 
 ///// IMPORTANT ////////
 // This is a convienent place to put any structs that could be used to send
