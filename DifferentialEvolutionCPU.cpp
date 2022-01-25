@@ -63,6 +63,7 @@
 //
 
 #include "DifferentialEvolutionCPU.hpp"
+#include "DifferentialEvolutionCPU.h"
 
 // Constructor for DifferentialEvolution
 //

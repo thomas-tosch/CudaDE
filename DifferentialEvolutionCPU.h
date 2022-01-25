@@ -62,23 +62,11 @@
 // std::vector<float> result = minimizer.fmin(d_x);
 //
 
-#ifndef DifferentialEvolutionCPU_hpp
-#define DifferentialEvolutionCPU_hpp
+#ifndef DifferentialEvolutionCPU_h
+#define DifferentialEvolutionCPU_h
 
 #include <stdio.h>
 #include <vector>
-#include "DifferentialEvolutionGPU.h"
-
-///// IMPORTANT ////////
-// This is a convienent place to put any structs that could be used to send
-// data to the cost. Here is the struct for the example of passing arguements.
-// I recommend you keep it here.
-struct dataCPU {
-    float *arr;
-    float v;
-    int dim;
-    int costFun;
-};
 
 void differentialEvolutionCPU(float *d_target,
                               float *d_trial,
@@ -95,52 +83,5 @@ void differentialEvolutionCPU(float *d_target,
                               void *costArgs,
                               float *h_output);
 
-class DifferentialEvolutionCPU {
-private:
-    float *d_target1;
-    float *d_target2;
-    float *d_cost;
-    float *d_mutant;
-    float *d_trial;
 
-
-    float *d_min;
-    float *d_max;
-    float *h_cost;
-
-    void *d_randStates;
-
-    int popSize;
-    int dim;
-
-    int CR;
-    int numGenerations;
-    float F;
-
-public:
-
-    // Constructor for DifferentialEvolution
-    //
-    // @param PopulationSize - the number of agents the DE solver uses.
-    // @param NumGenerations - the number of generation the differential evolution solver uses.
-    // @param Dimensions - the number of dimesnions for the solution.
-    // @param crossoverConstant - the number of mutants allowed pass each generation CR in
-    //              literature given in the range [0,1]
-    // @param mutantConstant - the scale on mutant changes (F in literature) given [0,2]
-    //              default = 0.5
-    // @param func - the cost function to minimize.
-    DifferentialEvolutionCPU(int PopulationSize, int NumGenerations, int Dimensions,
-                          float crossoverConstant, float mutantConstant,
-                          float *minBounds, float *maxBounds);
-
-    // fmin
-    // wrapper to the cuda function C function for differential evolution.
-    // @param args - this a pointer to arguments for the cost function.
-    //      This MUST point to device memory or NULL.
-    //
-    // @return the best set of parameters
-    float* fmin(void *args);
-
-};
-
-#endif /* DifferentialEvolutionCPU_hpp */
+#endif /* DifferentialEvolutionCPU_h */
