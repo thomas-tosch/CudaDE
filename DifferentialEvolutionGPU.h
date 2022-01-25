@@ -118,23 +118,6 @@ void differentialEvolution(float *d_target,
                            void *costArgs,
                            float *h_output);
 
-
-void differentialEvolutionCPU(float *d_target,
-                              float *d_trial,
-                              float *d_cost,
-                              float *d_target2,
-                              float *d_min,
-                              float *d_max,
-                              float *h_cost,
-                              int dim,
-                              int popSize,
-                              int maxGenerations,
-                              int CR, // Must be given as value between [0,999]
-                              float F,
-                              void *costArgs,
-                              float *h_output);
-
-
 // createRandNumGen
 // Inits the array of random number generators required by differentialEvolution
 // @param size - this should be the same size as popSize
