@@ -427,7 +427,7 @@ void evolutionKernel(float *d_target,
                                 float *d_target2,
                                 float *d_min,
                                 float *d_max,
-                                mt19937 rng,
+                                std::mt19937 rng,
                                 int dim,
                                 int popSize,
                                 int CR, // Must be given as value between [0,999]
