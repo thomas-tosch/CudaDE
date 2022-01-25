@@ -28,12 +28,12 @@
 #include <math.h>
 
 #include "DifferentialEvolutionCPU.hpp"
-//#include "DifferentialEvolution.hpp"
+#include "DifferentialEvolution.hpp"
 #include <iostream>
 #include <vector>
 #include <cuda_runtime.h>
 
-/*float runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
+float runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
     float arr[3] = {2.5, 2.6, 2.7};
@@ -71,7 +71,7 @@
     //std::cout << "Finished main function." << std::endl;
     return bestCost;
 }
-*/
+
 float runTestSequential(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
@@ -124,7 +124,7 @@ float standardDeviation(float *values)
     }
     return sqrt(sum / 25);
 }
-/*
+
 int testCase()
 {
     using std::chrono::high_resolution_clock;
@@ -170,12 +170,12 @@ int testCase()
         std::cout << std::endl;
     }
 }
-*/
+
 int main(int argc, char *argv[])
 {
-    /*if (argc == 1) {
+    if (argc == 1) {
         return testCase();
-    }*/
+    }
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
     using std::chrono::duration;
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
         maxBound[0] = std::stoi(argv[5]);
     }
     auto t1 = high_resolution_clock::now();
-    /*runTest(popSize, dim, costFun, minBound[0], maxBound[0], 0.8);*/
+    runTest(popSize, dim, costFun, minBound[0], maxBound[0], 0.8);
     auto t2 = high_resolution_clock::now();
     duration<double, std::milli> ms_double = t2 - t1;
     std::cout << ms_double.count() << "ms\n";
