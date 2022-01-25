@@ -74,7 +74,7 @@
 // @param mutantConstant - the scale on mutant changes (F in literature) given [0,2]
 //              default = 0.5
 // @param func - the cost function to minimize.
-DifferentialEvolution::DifferentialEvolutionCPU(int PopulationSize, int NumGenerations,
+DifferentialEvolutionCPU::DifferentialEvolutionCPU(int PopulationSize, int NumGenerations,
                                              int Dimensions, float crossoverConstant, float mutantConstant,
                                              float *minBounds, float *maxBounds)
 {
