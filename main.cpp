@@ -78,10 +78,10 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
     float arr[3] = {2.5, 2.6, 2.7};
 
     // data that is created in host, then copied to a device version for use with the cost function.
-    struct data x;
-    struct data *d_x;
+    struct dataCPU x;
+    struct dataCPU *d_x;
     gpuErrorCheck(cudaMalloc(&x.arr, sizeof(float) * 3));
-    unsigned long size = sizeof(struct data);
+    unsigned long size = sizeof(struct dataCPU);
     gpuErrorCheck(cudaMalloc((void **)&d_x, size));
 
     x.v = popSize;
