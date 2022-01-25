@@ -28,12 +28,12 @@
 #include <math.h>
 
 #include "DifferentialEvolutionCPU.hpp"
-#include "DifferentialEvolution.hpp"
+//#include "DifferentialEvolution.hpp"
 #include <iostream>
 #include <vector>
 #include <cuda_runtime.h>
 
-float runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
+/*float runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
     float arr[3] = {2.5, 2.6, 2.7};
@@ -71,7 +71,7 @@ float runTest(int popSize, int dim, int costFun, float minBound, float maxBound,
     //std::cout << "Finished main function." << std::endl;
     return bestCost;
 }
-
+*/
 float runTestSequential(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
@@ -173,9 +173,9 @@ int testCase()
 
 int main(int argc, char *argv[])
 {
-    if (argc == 1) {
+    /*if (argc == 1) {
         return testCase();
-    }
+    }*/
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
     using std::chrono::duration;
