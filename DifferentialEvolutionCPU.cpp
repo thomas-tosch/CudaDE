@@ -250,15 +250,11 @@ float schwefel(const float *vec, const void *args)
 
 float quatric(const float *vec, const void *args)
 {
-    curandState_t state;
-    curand_init(clock(), /* the seed controls the sequence of random values that are produced */
-                0, /* the sequence number is only important with multiple cores */
-                0, /* the offset is how much extra we advance in the sequence for each call, can be 0 */
-                &state);
+    std::mt19937 rng(clock());
     const struct dataCPU *a = (struct dataCPU *)args;
     float sum = 0;
     for (int i = 0; i < a->dim; i++) {
-        sum += i * pow(vec[i], 4) + curand(&state) % 1;
+        sum += i * pow(vec[i], 4) + rng() % 1;
     }
     return sum;
 }
