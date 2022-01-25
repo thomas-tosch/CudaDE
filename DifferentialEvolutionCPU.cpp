@@ -435,7 +435,7 @@ void evolutionKernel(float *d_target,
                                 void *costArgs,
                                 int idx)
 {
-    int idx = idx - 1;
+    idx--;
     if (idx >= popSize) return; // stop executing this block if
     // all populations have been used
 
