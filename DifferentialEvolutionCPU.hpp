@@ -117,21 +117,6 @@ public:
                           float crossoverConstant, float mutantConstant,
                           float *minBounds, float *maxBounds);
 
-    void differentialEvolutionCPU(float *d_target,
-                               float *d_trial,
-                               float *d_cost,
-                               float *d_target2,
-                               float *d_min,
-                               float *d_max,
-                               float *h_cost,
-                               mt19937 rng,
-                               int dim,
-                               int popSize,
-                               int maxGenerations,
-                               int CR, // Must be given as value between [0,999]
-                               float F,
-                               void *costArgs,
-                               float *h_output);
     // fmin
     // wrapper to the cuda function C function for differential evolution.
     // @param args - this a pointer to arguments for the cost function.
@@ -141,5 +126,20 @@ public:
     float* fmin(void *args);
 
 };
+void differentialEvolutionCPU(float *d_target,
+                              float *d_trial,
+                              float *d_cost,
+                              float *d_target2,
+                              float *d_min,
+                              float *d_max,
+                              float *h_cost,
+                              mt19937 rng,
+                              int dim,
+                              int popSize,
+                              int maxGenerations,
+                              int CR, // Must be given as value between [0,999]
+                              float F,
+                              void *costArgs,
+                              float *h_output);
 
 #endif /* DifferentialEvolution_hpp */
