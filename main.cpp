@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
         maxBound[0] = std::stoi(argv[5]);
     }
     auto t1 = high_resolution_clock::now();
-    runTest(popSize, dim, costFun, minBound[0], maxBound[0], 0.8);
+    /*runTest(popSize, dim, costFun, minBound[0], maxBound[0], 0.8);*/
     auto t2 = high_resolution_clock::now();
     duration<double, std::milli> ms_double = t2 - t1;
     std::cout << ms_double.count() << "ms\n";
