@@ -120,9 +120,9 @@ float* DifferentialEvolution::fmin(void *args)
 {
     std::vector<float> result(dim);
 
-    differentialEvolutionCPU(d_target1, d_trial, d_cost, d_target2, d_min,
-                          d_max, h_cost, d_randStates, dim, popSize, numGenerations, CR, F, args,
-                          result.data());
+    //differentialEvolutionCPU(d_target1, d_trial, d_cost, d_target2, d_min,
+      //                    d_max, h_cost, d_randStates, dim, popSize, numGenerations, CR, F, args,
+        //                  result.data());
 
     return h_cost;
 }
