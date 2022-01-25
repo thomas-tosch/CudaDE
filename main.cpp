@@ -98,7 +98,7 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
     float d_target2[popSize * dim] = {};
     float h_cost[popSize * dim] = {};
     differentialEvolutionCPU(d_target1, d_trial, d_cost, d_target2, minBounds,
-                             maxBounds, h_cost, dim, popSize, maxGen, cr, 0.5, *x,
+                             maxBounds, h_cost, dim, popSize, maxGen, cr, 0.5, &x,
                              result.data());
 
     float bestCost = FLT_MAX;
