@@ -62,7 +62,7 @@
 // std::vector<float> result = minimizer.fmin(d_x);
 //
 
-#include "DifferentialEvolution.hpp"
+#include "DifferentialEvolutionCPU.hpp"
 
 // Constructor for DifferentialEvolution
 //
