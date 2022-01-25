@@ -1,5 +1,5 @@
 all:
-	nvcc -o programDE main.cpp DifferentialEvolutionGPU.cpp DifferentialEvolution.cpp DifferentialEvolutionGPU.cu
+	nvcc -o programDE main.cpp DifferentialEvolutionCPU.cpp DifferentialEvolution.cpp DifferentialEvolutionGPU.cu
 
 
 clean:
