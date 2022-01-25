@@ -520,12 +520,16 @@ void differentialEvolutionCPU(float *d_target,
                            float *h_output)
 {
     std::mt19937 rng(clock());
-    generateRandomVectorAndInit(d_target, d_min, d_max, d_cost,
-            costArgs, popSize, dim, clock());
+    for (int i = 0; i < popSize; i++) {
+        generateRandomVectorAndInit(d_target, d_min, d_max, d_cost,
+                                    costArgs, popSize, dim, clock(), i);
+    }
 
     for (int i = 1; i <= maxGenerations; i++) {
-        evolutionKernel(d_target, d_trial, d_cost, d_target2, d_min, d_max, rng,
-                dim, popSize, CR, F, costArgs, i);
+        for (int j = 0; j < popSize; j++) {
+            evolutionKernel(d_target, d_trial, d_cost, d_target2, d_min, d_max, rng,
+                            dim, popSize, CR, F, costArgs, j);
+        }
         float *tmp = d_target;
         d_target = d_target2;
         d_target2 = tmp;
