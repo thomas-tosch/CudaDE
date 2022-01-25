@@ -79,6 +79,21 @@ struct dataCPU {
     int costFun;
 };
 
+void differentialEvolutionCPU(float *d_target,
+                              float *d_trial,
+                              float *d_cost,
+                              float *d_target2,
+                              float *d_min,
+                              float *d_max,
+                              float *h_cost,
+                              int dim,
+                              int popSize,
+                              int maxGenerations,
+                              int CR, // Must be given as value between [0,999]
+                              float F,
+                              void *costArgs,
+                              float *h_output);
+
 class DifferentialEvolutionCPU {
 private:
     float *d_target1;
@@ -126,19 +141,5 @@ public:
     float* fmin(void *args);
 
 };
-void differentialEvolutionCPU(float *d_target,
-                              float *d_trial,
-                              float *d_cost,
-                              float *d_target2,
-                              float *d_min,
-                              float *d_max,
-                              float *h_cost,
-                              int dim,
-                              int popSize,
-                              int maxGenerations,
-                              int CR, // Must be given as value between [0,999]
-                              float F,
-                              void *costArgs,
-                              float *h_output);
 
 #endif /* DifferentialEvolutionCPU_hpp */
