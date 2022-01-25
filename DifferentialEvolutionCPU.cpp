@@ -524,7 +524,7 @@ void differentialEvolutionCPU(float *d_target,
             costArgs, popSize, dim, clock());
 
     for (int i = 1; i <= maxGenerations; i++) {
-        evolutionKernel(d_target, d_trial, d_cost, d_target2, d_min, d_max, rng
+        evolutionKernel(d_target, d_trial, d_cost, d_target2, d_min, d_max, rng,
                 dim, popSize, CR, F, costArgs, i);
         float *tmp = d_target;
         d_target = d_target2;
