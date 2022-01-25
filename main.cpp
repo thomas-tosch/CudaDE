@@ -76,14 +76,9 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
 {
 
     float arr[3] = {2.5, 2.6, 2.7};
-
-    // data that is created in host, then copied to a device version for use with the cost function.
     struct dataCPU x;
     struct dataCPU *d_x;
-    gpuErrorCheck(cudaMalloc(&x.arr, sizeof(float) * 3));
     unsigned long size = sizeof(struct dataCPU);
-    gpuErrorCheck(cudaMalloc((void **)&d_x, size));
-
     x.v = popSize;
     x.dim = dim;
     x.costFun = costFun;
@@ -91,7 +86,6 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
     float maxBounds[x.dim] = {maxBound};
     int maxGen = (10000 * x.dim) / x.v;
     std::vector<float> result(dim);
-
     float d_target1[popSize * dim] = {};
     float d_trial[popSize * dim] = {};
     float d_cost[popSize * dim] = {};
@@ -100,7 +94,6 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
     differentialEvolutionCPU(d_target1, d_trial, d_cost, d_target2, minBounds,
                              maxBounds, h_cost, dim, popSize, maxGen, cr, 0.5, &x,
                              result.data());
-
     float bestCost = FLT_MAX;
     for (int i = 0; i < popSize; i++) {
         float curCost = result[i];
@@ -108,8 +101,6 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
             bestCost = curCost;
         }
     }
-    //std::cout << bestCost << std::endl;
-    //std::cout << "Finished main function." << std::endl;
     return bestCost;
 }
 
