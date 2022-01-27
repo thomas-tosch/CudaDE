@@ -233,46 +233,6 @@ float rosenbrock(const float *vec, const void *args)
     return sum;
 }
 
-float schwefel(const float *vec, const void *args)
-{
-    const struct dataCPU *a = (struct dataCPU *)args;
-
-    float sum = 0;
-    for (int j = 0; j < a->dim; j++) {
-        float sum2 = 0;
-        for (int i = 0; i < j; i++) {
-            sum2 += vec[i];
-        }
-        sum += pow(sum2, 2);
-    }
-    return sum;
-}
-
-float quatric(const float *vec, const void *args)
-{
-    std::mt19937 rng(clock());
-    const struct dataCPU *a = (struct dataCPU *)args;
-    float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum += i * pow(vec[i], 4) + rng() % 1;
-    }
-    return sum;
-}
-
-float ackley(const float *vec, const void *args)
-{
-    const struct dataCPU *a = (struct dataCPU *)args;
-    float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum += pow(vec[i], 2);
-    }
-    float sum2 = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum2 += cos(2 * M_PI * vec[i]);
-    }
-    return 20 + expf(1) - 20 * expf(-0.2 * sqrt((1 / a->dim) * sum)) - expf((1 / a->dim) * sum2);
-}
-
 float griewank(const float *vec, const void *args)
 {
     const struct dataCPU *a = (struct dataCPU *)args;
@@ -301,94 +261,16 @@ float rastrigin(const float *vec, const void *args)
     return (10 * a->dim + sum);
 }
 
-float schwefelFunc(const float *vec, const void *args)
-{
-    const struct dataCPU *a = (struct dataCPU *)args;
-
-    float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum += vec[i] * sin(sqrt((float)abs(vec[i])));
-    }
-    return 418.9829 * a->dim - sum;
-}
-
-float salomon(const float *vec, const void *args)
-{
-    const struct dataCPU *a = (struct dataCPU *)args;
-
-    float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum += pow(vec[i], 2);
-    }
-
-    float sum2 = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum2 += pow(vec[i], 2) + 1;
-    }
-
-    return -cos(2*M_PI*sqrt((float)sum)) + 0.1 * sqrt((float) sum2);
-}
-
-float whitely(const float *vec, const void *args)
-{
-    const struct dataCPU *a = (struct dataCPU *)args;
-    float sum = 0;
-    float total = 0;
-    float y = 0;
-    for (int j = 0; j < a->dim; j++) {
-        sum = 0;
-        for (int i = 0; i <= j; i++) {
-            y = 100 * pow(vec[j] - pow(vec[i], 2), 2) + pow(1 - vec[i], 2);
-            sum += ((y / 4000) - cos(y) + 1);
-        }
-        total += sum;
-    }
-    return total;
-}
-
-float w(float x, float a, float b, float m)
-{
-    float sum = 0;
-    for (int k = 0; k <= m ; k++) {
-        sum += pow(a, k) * cos(2*M_PI*pow(b,k)*(x+0.5));
-    }
-    return sum;
-}
-
-float weierstrass(const float *vec, const void *args)
-{
-    const struct dataCPU *a = (struct dataCPU *)args;
-    float sum = 0;
-    for (int i = 0; i < a->dim; i++) {
-        sum += w(vec[i], 0.5, 3, 20) - a->dim * w(0, 0.5, 3, 20);
-    }
-    return sum;
-}
-
 float costFunc(const float *vec, const void *args) {
     const struct dataCPU *a = (struct dataCPU *)args;
     if (a->costFun == SPHERE)
     { return sphere(vec, args); }
     else if (a->costFun == ROSENBROCK)
     { return rosenbrock(vec, args); }
-    else if (a->costFun == SCHWEFEL)
-    { return schwefel(vec, args); }
-    else if (a->costFun == QUATRIC)
-    { return quatric(vec, args); }
-    else if (a->costFun == ACKLEY)
-    { return ackley(vec, args); }
     else if (a->costFun == GRIEWANK)
     { return griewank(vec, args); }
     else if (a->costFun == RASTRIGIN)
     { return rastrigin(vec, args); }
-    else if (a->costFun == SCHWEFELFUNC)
-    { return schwefelFunc(vec, args); }
-    else if (a->costFun == SALOMON)
-    { return salomon(vec, args); }
-    else if (a->costFun == WHITELY)
-    { return whitely(vec, args); }
-    else if (a->costFun == WEIERSTRASS)
-    { return weierstrass(vec, args); }
     return 0;
 }
 

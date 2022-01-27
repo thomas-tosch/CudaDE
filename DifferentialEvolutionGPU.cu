@@ -129,7 +129,7 @@ __device__ float cost3D(const float *vec, const void *args)
     float z = vec[2] + 3;
     return (x*x*x*x)- (2*x*x*x) + (z*z*z*z) + (y*y*y);
 }
-__device__ float sphere(const float *vec, const void *args)
+__device__ float cuSphere(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
 
@@ -142,7 +142,7 @@ __device__ float sphere(const float *vec, const void *args)
     return sum;
 }
 
-__device__ float rosenbrock(const float *vec, const void *args)
+__device__ float cuRosenbrock(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
 
@@ -200,7 +200,7 @@ __device__ float ackley(const float *vec, const void *args)
     return 20 + expf(1) - 20 * expf(-0.2 * sqrt((1 / a->dim) * sum)) - expf((1 / a->dim) * sum2);
 }
 
-__device__ float griewank(const float *vec, const void *args)
+__device__ float cuGriewank(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
     float sum = 0;
@@ -216,7 +216,7 @@ __device__ float griewank(const float *vec, const void *args)
     return (sum - mult + 1);
 }
 
-__device__ float rastrigin(const float *vec, const void *args)
+__device__ float cuRastrigin(const float *vec, const void *args)
 {
     const struct data *a = (struct data *)args;
 
