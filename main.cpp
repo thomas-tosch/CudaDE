@@ -102,6 +102,7 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
             bestCost = curCost;
         }
     }
+    std::cout << bestCost << std::endl;
     return bestCost;
 }
 
