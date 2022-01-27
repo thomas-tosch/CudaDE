@@ -158,10 +158,10 @@ int testCase()
                                                 costFuncs[l], minBounds[l],
                                                 maxBounds[l],crossRates[k]
                         );
-                        std::cout << costValues[m] << std::endl;
                         auto t2 = high_resolution_clock::now();
                         duration<double, std::milli> ms_double = t2 - t1;
                         costTimes[m] = ms_double.count();
+                        std::cout << costValues[m] << std::endl;
                     }
                     //std::cout << "Pop: " << popSizes[j] << std::endl;
                     std::cout << "F(" << costFuncs[l] << ");" << popSizes[j] << ";";
