@@ -292,7 +292,6 @@ void generateRandomVectorAndInit(float *d_x, float *d_min, float *d_max,
                                             float *d_cost, void *costArgs,
                                             int popSize, int dim, unsigned long seed, int idx)
 {
-    idx--;
     if (idx >= popSize) return;
 
     std::mt19937 rng(seed);
@@ -317,7 +316,6 @@ void evolutionKernel(float *d_target,
                                 void *costArgs,
                                 int idx)
 {
-    idx--;
     if (idx >= popSize) return; // stop executing this block if
     // all populations have been used
 
