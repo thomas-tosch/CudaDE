@@ -112,7 +112,6 @@ float meanValue(float *values)
 {
     float sum = 0;
     for (int i = 0; i < 25; i ++) {
-        std::cout << values[i] << std::endl;
         sum += values[i];
     }
     return sum / 25;
