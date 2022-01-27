@@ -107,8 +107,8 @@ DifferentialEvolutionCPU::DifferentialEvolutionCPU(int PopulationSize, int NumGe
     ret = cudaMemcpy(d_max, maxBounds, sizeof(float) * dim, cudaMemcpyHostToDevice);
     gpuErrorCheck(ret);
 */
-    h_cost = new float[popSize * dim];
-    d_randStates = createRandNumGen(popSize);
+    //h_cost = new float[popSize * dim];
+    //d_randStates = createRandNumGen(popSize);
 }
 
 // fmin
