@@ -587,7 +587,7 @@ void differentialEvolution(float *d_target,
 }
 
 // allocate the memory needed for random number generators.
-void *createRandNumGen(int size)
+void *cuCreateRandNumGen(int size)
 {
     void *x;
     gpuErrorCheck(cudaMalloc(&x, sizeof(curandState_t)*size));
