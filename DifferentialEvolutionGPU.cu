@@ -307,7 +307,7 @@ __device__ float weierstrass(const float *vec, const void *args)
 // also function pointers in CUDA are complex to work with, and particulary with the
 // architecture used where a standard C++ class is used to wrap the CUDA kernels and
 // handle most of the memory mangement used.
-__device__ float costFunc(const float *vec, const void *args) {
+__device__ float cuCostFunc(const float *vec, const void *args) {
     const struct data *a = (struct data *)args;
     if (a->costFun == QUADRATIC_COST)
     { return quadraticFunc(vec, args); }
@@ -378,7 +378,7 @@ __global__ void generateRandomVectorAndInit(float *d_x, float *d_min, float *d_m
         d_x[(idx*dim) + i] = (curand_uniform(state) * (d_max[0] - d_min[0])) + d_min[0];
     }
 
-    d_cost[idx] = costFunc(&d_x[idx*dim], costArgs);
+    d_cost[idx] = cuCostFunc(&d_x[idx*dim], costArgs);
 }
 
 
@@ -462,7 +462,7 @@ __global__ void evolutionKernel(float *d_target,
         j = (j+1) % dim;
     } // end for loop through parameters
     float score = 0;
-    score = costFunc(&d_trial[idx*dim], costArgs);
+    score = cuCostFunc(&d_trial[idx*dim], costArgs);
     if (score < d_cost[idx]) {
         // copy trial into new vector
         for (j = 0; j < dim; j++) {
