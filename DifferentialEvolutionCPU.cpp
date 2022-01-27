@@ -428,7 +428,7 @@ void differentialEvolutionCPU(float *d_target,
             bestIdx = i;
         }
     }
-    h_output = bestCost;
+    h_output = h_cost;
 }
 
 // allocate the memory needed for random number generators.
