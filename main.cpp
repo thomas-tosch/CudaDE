@@ -114,7 +114,7 @@ float meanValue(float *values)
     for (int i = 0; i < 25; i ++) {
         sum += values[i];
     }
-    return sum / 25;
+    return sum / 25.0f;
 }
 
 float standardDeviation(float *values)
