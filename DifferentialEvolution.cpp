@@ -108,7 +108,7 @@ DifferentialEvolution::DifferentialEvolution(int PopulationSize, int NumGenerati
     gpuErrorCheck(ret);
 
     h_cost = new float[popSize * dim];
-    d_randStates = createRandNumGen(popSize);
+    d_randStates = cuCreateRandNumGen(popSize);
 }
 
 // fmin
