@@ -83,6 +83,4 @@ void differentialEvolutionCPU(float *d_target,
                               void *costArgs,
                               float *h_output);
 
-
-void *createRandNumGen(int size);
 #endif /* DifferentialEvolutionCPU_h */
