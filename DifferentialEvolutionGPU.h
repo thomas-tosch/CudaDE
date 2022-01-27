@@ -121,6 +121,6 @@ void differentialEvolution(float *d_target,
 // createRandNumGen
 // Inits the array of random number generators required by differentialEvolution
 // @param size - this should be the same size as popSize
-void *createRandNumGen(int size);
+void *cuCreateRandNumGen(int size);
 
 #endif
