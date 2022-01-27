@@ -351,7 +351,7 @@ __device__ float cuCostFunc(const float *vec, const void *args) {
 
 
 
-void printCudaVector(float *d_vec, int size)
+void cuPrintCudaVector(float *d_vec, int size)
 {
     float *h_vec = new float[size];
     gpuErrorCheck(cudaMemcpy(h_vec, d_vec, sizeof(float) * size, cudaMemcpyDeviceToHost));
