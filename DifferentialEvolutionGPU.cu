@@ -316,9 +316,9 @@ __device__ float costFunc(const float *vec, const void *args) {
     else if (a->costFun == MANY_LOCAL_MINMA)
     { return costFunctionWithManyLocalMinima(vec, args); }
     else if (a->costFun == SPHERE)
-    { return sphere(vec, args); }
+    { return cuSphere(vec, args); }
     else if (a->costFun == ROSENBROCK)
-    { return rosenbrock(vec, args); }
+    { return cuRosenbrock(vec, args); }
     else if (a->costFun == SCHWEFEL)
     { return schwefel(vec, args); }
     else if (a->costFun == QUATRIC)
@@ -326,9 +326,9 @@ __device__ float costFunc(const float *vec, const void *args) {
     else if (a->costFun == ACKLEY)
     { return ackley(vec, args); }
     else if (a->costFun == GRIEWANK)
-    { return griewank(vec, args); }
+    { return cuGriewank(vec, args); }
     else if (a->costFun == RASTRIGIN)
-    { return rastrigin(vec, args); }
+    { return cuRastrigin(vec, args); }
     else if (a->costFun == SCHWEFELFUNC)
     { return schwefelFunc(vec, args); }
     else if (a->costFun == SALOMON)
