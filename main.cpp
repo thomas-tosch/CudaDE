@@ -97,7 +97,7 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
                              result.data());
     float bestCost = FLT_MAX;
     for (int i = 0; i < popSize; i++) {
-        float curCost = result[i];
+        float curCost = h_cost[i];
         if (curCost < bestCost) {
             bestCost = curCost;
         }

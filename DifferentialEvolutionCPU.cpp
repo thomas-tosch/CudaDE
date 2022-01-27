@@ -417,7 +417,6 @@ void differentialEvolutionCPU(float *d_target,
         d_target2 = tmp;
     } // end for (generations)
 
-    d_cost = h_cost;
     int bestIdx = -1;
     float bestCost = FLT_MAX;
     for (int i = 0; i < popSize; i++) {
@@ -428,7 +427,7 @@ void differentialEvolutionCPU(float *d_target,
             bestIdx = i;
         }
     }
-    h_output = h_cost;
+    h_output = d_target+(bestIdx*dim);
 }
 
 // allocate the memory needed for random number generators.
