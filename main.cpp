@@ -163,9 +163,9 @@ int testCase()
                         costTimes[m] = ms_double.count();
                     }
                     //std::cout << "Pop: " << popSizes[j] << std::endl;
-                    std::cout << "F(" << costFuncs[l] << ");" << popSizes[j] << ";";
-                    std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << ");";
-                    std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << ");" << std::endl;
+                    std::cout << "F(" << costFuncs[l] << ")," << popSizes[j] << ",";
+                    std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << "),";
+                    std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << ")," << std::endl;
                 }
             }
         }
