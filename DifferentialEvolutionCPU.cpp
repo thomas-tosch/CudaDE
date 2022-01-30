@@ -216,8 +216,8 @@ float sphere(const float *vec, const void *args)
         sum += (vec[i] * vec[i]);
     }
     // -450
-    //return sum - 450;
-    return sum;
+    return sum - 450;
+    //return sum;
 }
 
 float rosenbrock(const float *vec, const void *args)
@@ -229,8 +229,8 @@ float rosenbrock(const float *vec, const void *args)
         sum += ((100 * powf(vec[i+1] - powf(vec[i], 2), 2)) + powf(1 - vec[i], 2));
     }
     // +390
-    //return sum + 390;
-    return sum;
+    return sum + 390;
+    //return sum;
 }
 
 float griewank(const float *vec, const void *args)
@@ -245,8 +245,8 @@ float griewank(const float *vec, const void *args)
         mult *= (cos(vec[i - 1] / sqrtf(i)));
     }
     // -180
-    //return (sum - mult + 1) - 180;
-    return (sum - mult + 1);
+    return (sum - mult + 1) - 180;
+    //return (sum - mult + 1);
 }
 
 float rastrigin(const float *vec, const void *args)
@@ -257,8 +257,8 @@ float rastrigin(const float *vec, const void *args)
     for (int i = 0; i < a->dim; i++) {
         sum += (pow(vec[i], 2) - 10 * cos(2 * M_PI * vec[i]));
     }
-    //return (10 * a->dim + sum) - 330;
-    return (10 * a->dim + sum);
+    return (10 * a->dim + sum) - 330;
+    //return (10 * a->dim + sum);
 }
 
 float costFunc(const float *vec, const void *args) {
