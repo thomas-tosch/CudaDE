@@ -138,8 +138,8 @@ __device__ float cuSphere(const float *vec, const void *args)
         sum += (vec[i] * vec[i]);
     }
     // -450
-    //return sum - 450;
-    return sum;
+    return sum - 450;
+    //return sum;
 }
 
 __device__ float cuRosenbrock(const float *vec, const void *args)
@@ -151,8 +151,8 @@ __device__ float cuRosenbrock(const float *vec, const void *args)
         sum += ((100 * powf(vec[i+1] - powf(vec[i], 2), 2)) + powf(1 - vec[i], 2));
     }
     // +390
-    //return sum + 390;
-    return sum;
+    return sum + 390;
+    //return sum;
 }
 
 __device__ float schwefel(const float *vec, const void *args)
@@ -212,8 +212,8 @@ __device__ float cuGriewank(const float *vec, const void *args)
         mult *= (cos(vec[i - 1] / sqrtf(i)));
     }
     // -180
-    //return (sum - mult + 1) - 180;
-    return (sum - mult + 1);
+    return (sum - mult + 1) - 180;
+    //return (sum - mult + 1);
 }
 
 __device__ float cuRastrigin(const float *vec, const void *args)
@@ -224,8 +224,8 @@ __device__ float cuRastrigin(const float *vec, const void *args)
     for (int i = 0; i < a->dim; i++) {
         sum += (pow(vec[i], 2) - 10 * cos(2 * M_PI * vec[i]));
     }
-    //return (10 * a->dim + sum) - 330;
-    return (10 * a->dim + sum);
+    return (10 * a->dim + sum) - 330;
+    //return (10 * a->dim + sum);
 }
 
 __device__ float schwefelFunc(const float *vec, const void *args)
