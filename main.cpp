@@ -154,7 +154,7 @@ int testCase()
                 {
                     for (int m = 0; m < 25; m++) {
                         auto t1 = high_resolution_clock::now();
-                        costValues[m] = runTestSequential(popSizes[j], dimensions[i],
+                        costValues[m] = runTest(popSizes[j], dimensions[i],
                                                 costFuncs[l], minBounds[l],
                                                 maxBounds[l],crossRates[k]
                         );
