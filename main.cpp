@@ -177,7 +177,7 @@ int testCase()
                     std::cout << "F(" << costFuncs[l] << ")," << popSizes[j] << ",";
                     std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << "),";
                     std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << "),";
-                    std::cout << "," << successRate(costValues) << std::endl;
+                    std::cout << successRate(costValues) << std::endl;
                 }
             }
         }
