@@ -127,6 +127,17 @@ float standardDeviation(float *values)
     return sqrt(sum / 25);
 }
 
+float successRate(float *values)
+{
+    float success[25] = {0};
+    for (int i = 0; i < 25; ++i) {
+        if (values[i] < pow(10, -8)) {
+            success[i] = 1;
+        }
+    }
+    return meanValue(success);
+}
+
 int testCase()
 {
     using std::chrono::high_resolution_clock;
@@ -163,9 +174,10 @@ int testCase()
                         costTimes[m] = ms_double.count();
                     }
                     //std::cout << "Pop: " << popSizes[j] << std::endl;
-                    std::cout << "F(" << costFuncs[l] << ");" << popSizes[j] << ";";
-                    std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << ");";
-                    std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << ");" << std::endl;
+                    std::cout << "F(" << costFuncs[l] << ")," << popSizes[j] << ",";
+                    std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << "),";
+                    std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << "),";
+                    std::cout << "," << successRate(costValues) << std::endl;
                 }
             }
         }
