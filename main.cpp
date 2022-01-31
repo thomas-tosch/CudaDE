@@ -127,11 +127,11 @@ float standardDeviation(float *values)
     return sqrt(sum / 25);
 }
 
-float successRate(float *values)
+float successRate(float *values, float offset)
 {
     float success[25] = {0};
     for (int i = 0; i < 25; ++i) {
-        if (values[i] < pow(10, -8)) {
+        if (values[i] < (pow(10, -8) + offset)) {
             success[i] = 1;
         }
     }
@@ -150,6 +150,7 @@ int testCase()
     int costFuncs[4] = { SPHERE, ROSENBROCK, GRIEWANK, RASTRIGIN };
     float minBounds[4] = { -5.12, -5, -600, -5.12};
     float maxBounds[4] = { 5.12,   10, 600, 5.12};
+    float offsets[4] = { -450,  390 , -180, -330 };
     float costValues[25] = {0};
     float costTimes[25] = {0};
 
@@ -177,7 +178,7 @@ int testCase()
                     std::cout << "F(" << costFuncs[l] << ")," << popSizes[j] << ",";
                     std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << "),";
                     std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << "),";
-                    std::cout << successRate(costValues) << std::endl;
+                    std::cout << successRate(costValues, offsets[l]) << std::endl;
                 }
             }
         }
