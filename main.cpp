@@ -138,7 +138,7 @@ float successRate(float *values, float offset)
     return meanValue(success);
 }
 
-int testCase()
+int testCase(bool cuda)
 {
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
@@ -166,10 +166,18 @@ int testCase()
                 {
                     for (int m = 0; m < 25; m++) {
                         auto t1 = high_resolution_clock::now();
-                        costValues[m] = runTest(popSizes[j], dimensions[i],
-                                                costFuncs[l], minBounds[l],
-                                                maxBounds[l],crossRates[k]
-                        );
+                        if (cuda) {
+                            costValues[m] = runTest(popSizes[j], dimensions[i],
+                                                    costFuncs[l], minBounds[l],
+                                                    maxBounds[l],crossRates[k]
+                            );
+                        }
+                        else {
+                            costValues[m] = runTestSequential(popSizes[j], dimensions[i],
+                                                    costFuncs[l], minBounds[l],
+                                                    maxBounds[l],crossRates[k]
+                            );
+                        }
                         auto t2 = high_resolution_clock::now();
                         duration<double, std::milli> ms_double = t2 - t1;
                         costTimes[m] = ms_double.count();
@@ -190,9 +198,9 @@ int main(int argc, char *argv[])
 {
     if (argc == 2) {
         if (std::stoi(argv[1]) == 1) {
-            return testCase();
+            return testCase(1);
         }
-        return runTestSequential();
+        return testCase(0);
     }
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
