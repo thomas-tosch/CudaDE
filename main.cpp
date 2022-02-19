@@ -34,6 +34,7 @@
 #include <vector>
 #include <cuda_runtime.h>
 
+// cuda version of DE, runs of GPU
 float runTest(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
@@ -49,9 +50,11 @@ float runTest(int popSize, int dim, int costFun, float minBound, float maxBound,
     x.v = popSize;
     x.dim = dim;
     x.costFun = costFun;
+//    bounds are set to dim size with a single value
     float minBounds[x.dim] = {minBound};
     float maxBounds[x.dim] = {maxBound};
     gpuErrorCheck(cudaMemcpy(x.arr, (void *)&arr, sizeof(float) * 3, cudaMemcpyHostToDevice));
+//    maximul amount of function calls
     int maxGen = (10000 * x.dim) / x.v;
     // Create the minimizer with a popsize of 192, 50 generations, Dimensions = 2, CR = 0.9, F = 2
     DifferentialEvolution minimizer(x.v,maxGen, x.dim,
@@ -68,11 +71,10 @@ float runTest(int popSize, int dim, int costFun, float minBound, float maxBound,
             bestCost = curCost;
         }
     }
-    //std::cout << bestCost << std::endl;
-    //std::cout << "Finished main function." << std::endl;
     return bestCost;
 }
 
+// sequential version of DE, runs of cpu
 float runTestSequential(int popSize, int dim, int costFun, float minBound, float maxBound, float cr)
 {
 
@@ -102,7 +104,6 @@ float runTestSequential(int popSize, int dim, int costFun, float minBound, float
             bestCost = curCost;
         }
     }
-    //std::cout << bestCost << std::endl;
     return bestCost;
 }
 
@@ -127,6 +128,7 @@ float standardDeviation(float *values)
     return sqrt(sum / 25);
 }
 
+// Not used: a mean value of successes (value below 10e-8) between 0 and 1.
 float successRate(float *values, float offset)
 {
     float success[25] = {0};
@@ -140,10 +142,13 @@ float successRate(float *values, float offset)
 
 int testCase(bool cuda)
 {
+    // Setup for durations
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
     using std::chrono::duration;
     using std::chrono::milliseconds;
+
+    //  test case setup
     int dimensions[3] = { 10, 50, 100};
     int popSizes[4] = { 50, 100, 500, 1000 };
     float crossRates[1] = { 0.8 };
@@ -151,6 +156,8 @@ int testCase(bool cuda)
     float minBounds[4] = { -5.12, -5, -600, -5.12};
     float maxBounds[4] = { 5.12,   10, 600, 5.12};
     float offsets[4] = { -450,  390 , -180, -330 };
+
+//    output of 25 runs values (time and cost)
     float costValues[25] = {0};
     float costTimes[25] = {0};
 
@@ -166,6 +173,7 @@ int testCase(bool cuda)
                 {
                     for (int m = 0; m < 25; m++) {
                         auto t1 = high_resolution_clock::now();
+                        // cuda allows to switch between sequential and cuda
                         if (cuda) {
                             costValues[m] = runTest(popSizes[j], dimensions[i],
                                                     costFuncs[l], minBounds[l],
@@ -182,7 +190,7 @@ int testCase(bool cuda)
                         duration<double, std::milli> ms_double = t2 - t1;
                         costTimes[m] = ms_double.count();
                     }
-                    //std::cout << "Pop: " << popSizes[j] << std::endl;
+                    // output of results in correct format
                     std::cout << "F(" << costFuncs[l] << ")," << popSizes[j] << ",";
                     std::cout << meanValue(costValues) << " (" << standardDeviation(costValues) << "),";
                     std::cout << meanValue(costTimes) << " (" << standardDeviation(costTimes) << "),";
@@ -196,12 +204,15 @@ int testCase(bool cuda)
 
 int main(int argc, char *argv[])
 {
+    // if only 1 arg (1 or 0), we switch in the test case mode
+    // it'll run 25 iteration of several dim/pop setups
     if (argc == 2) {
         if (std::stoi(argv[1]) == 1) {
             return testCase(1);
         }
         return testCase(0);
     }
+    // otherwise it runs a single simulation with args
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
     using std::chrono::duration;
