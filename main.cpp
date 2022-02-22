@@ -224,20 +224,25 @@ int main(int argc, char *argv[])
     int dim = 3;
     int popSize = 3;
     int costFun = 3;
+//    first arg pop
     if (argc > 1) {
         popSize = std::stoi(argv[1]);
     }
+//    second arg dimension
     if (argc > 2) {
         dim = std::stoi(argv[2]);
     }
+//    third arg is function wanted
     if (argc > 3) {
         costFun = std::stoi(argv[3]);
     }
     float minBound[dim] = {-100};
     float maxBound[dim] = {100};
+//    fourth arg is lower bound
     if (argc > 4) {
         minBound[0] = std::stoi(argv[4]);
     }
+//    fifth arg is upper bound
     if (argc > 5) {
         maxBound[0] = std::stoi(argv[5]);
     }

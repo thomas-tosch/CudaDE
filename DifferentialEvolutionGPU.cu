@@ -434,6 +434,7 @@ __global__ void evolutionKernel(float *d_target,
     float F3 = 0.2;
     float F4 = 0.2;
 
+//    finding best cost for unified mutation
     float best = FLT_MAX;
     int bestIdx = 0;
     for (int i = 0; i < popSize; i++) {
@@ -448,6 +449,7 @@ __global__ void evolutionKernel(float *d_target,
         //printf("%f", curand(state));
         if (curand(state) < CR || k==dim) {
             // trial vector param comes from vector plus weighted differential
+//            unified mutation
             d_trial[(idx*dim)+j] = d_target[(idx*dim)+j] + (F1 * (d_target[(bestIdx*dim)+j] - d_target[(idx*dim)+j]))
                                    + (F2 * (d_target[(a*dim)+j] - d_target[(idx*dim)+j])) + (F3 * (d_target[(b*dim)+j] - d_target[(c*dim)+j]))
                                    + (F4 * (d_target[(d*dim)+j] - d_target[(e*dim)+j]));
